@@ -4,6 +4,26 @@ require_once 'teamportal.civix.php';
 use CRM_Teamportal_ExtensionUtil as E;
 
 /**
+ * Implements hook_civicrm_permissions()
+ * 
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_permission/
+ */
+function teamportal_civicrm_permission(&$permissions) {
+  $permissions['access Team Portal API'] = E::ts('Access team portal api\'s');
+}
+
+/**
+ * Implements hook_civicrm_alterAPIPermissions()
+ * 
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_alterAPIPermissions/
+ */
+function teamportal_civicrm_alterAPIPermissions($entity, $action, &$params, &$permissions) {
+    if ($entity == 'team_portal_captains' || $entity == 'team_portal_members') {
+      $permissions[$entity][$action] = arra('access Team Portal API');
+    }
+}
+
+/**
  * Implements hook_civicrm_config().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
