@@ -11,7 +11,7 @@ class CRM_Teamportal_Api_Captains {
 	}
 	
 	protected function getTeamCaptains($event_id, $role="Teamcaptain") {
-		$config = CRM_Api_RoparunConfig::singleton();
+		$config = CRM_Teamportal_Config::singleton();
 		$campaign_id = CRM_Generic_CurrentEvent::getRoparunCampaignId($event_id);
 		
 		$captainSql = "
@@ -38,6 +38,7 @@ class CRM_Teamportal_Api_Captains {
 			LEFT JOIN civicrm_email ON civicrm_email.contact_id = civicrm_contact.id AND civicrm_email.is_primary = 1
 			WHERE team_member_data.{$config->getTeamRoleCustomFieldColumnName()} = %1
 			AND civicrm_participant.event_id = %2 AND team_participant.event_id = %2
+			AND civicrm_participant.status_id IN (".implode(", ", $config->getActiveParticipantStatusIds()).")
 			ORDER BY civicrm_contact.display_name	
 		";
 		$params[1] = array($role, 'String');

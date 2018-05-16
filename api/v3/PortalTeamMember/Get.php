@@ -95,7 +95,6 @@ function _civicrm_api3_portal_team_member_Get_spec(&$spec) {
     'api.required' => false,
     'api.return' => true,
     'api.filter' => true,
-    'api.default' => 1,
     'title' => E::ts('Is active'),
     'type' => CRM_Utils_Type::T_BOOLEAN,
   );
@@ -199,9 +198,9 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     ";
   
   $whereClauses = array();
-  if (!isset($params['is_active']) || $params['is_active']) {
+  if (isset($params['is_active']) && $params['is_active']) {
     $whereClauses[] = "civicrm_participant.status_id IN (".implode(", ", $config->getActiveParticipantStatusIds()).")";
-  } else {
+  } elseif (isset($params['is_active']) && !$params['is_active']) {
     $whereClauses[] = "civicrm_participant.status_id NOT IN (".implode(", ", $config->getActiveParticipantStatusIds()).")";
   }
   

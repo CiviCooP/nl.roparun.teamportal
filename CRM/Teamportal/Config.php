@@ -4,6 +4,8 @@ class CRM_Teamportal_Config {
   
   private static $singleton;
   
+  private $genericConfig;
+  
   private $_teamMemberDataCustomGroupId;
   private $_teamMemberDataCustomGroupTableName;
   private $_memberOfTeamCustomFieldId;
@@ -13,9 +15,11 @@ class CRM_Teamportal_Config {
   private $_activeParticipantStatusIds = array();
   
   private function __construct() {
+    $this->genericConfig = CRM_Generic_Config::singleton();
+    
     $this->loadCustomGroups();
     
-    $participantStatuses = civicrm_api3('ParticipantStatusType', 'get', array('is_active' => 1, 'options' => array('limit' => 0)));
+    $participantStatuses = civicrm_api3('ParticipantStatusType', 'get', array('is_active' => 1, 'class' => array('IN' => array("Positive")), 'options' => array('limit' => 0)));
     foreach($participantStatuses['values'] as $participantStatus) {
       $this->_activeParticipantStatusIds[] = $participantStatus['id'];
     }
@@ -29,6 +33,48 @@ class CRM_Teamportal_Config {
       self:: $singleton = new CRM_Teamportal_Config();
     }
     return self::$singleton;
+  }
+  
+  /**
+   * Getter for the id of the custom group team_data.
+   */
+  public function getTeamDataCustomGroupId() {
+    return $this->genericConfig->getTeamDataCustomGroupId();
+  }
+  
+  /**
+   * Getter for the table name of the custom group team_data.
+   */
+  public function getTeamDataCustomGroupTableName() {
+    return $this->genericConfig->getTeamDataCustomGroupTableName();
+  }
+  
+  /**
+   * Getter for the id of the custom field team_nr.
+   */
+  public function getTeamNrCustomFieldId() {
+    return $this->genericConfig->getTeamNrCustomFieldId();
+  }
+  
+  /**
+   * Getter for the column name of the custom field team_nr.
+   */
+  public function getTeamNrCustomFieldColumnName() {
+    return $this->genericConfig->getTeamNrCustomFieldColumnName();
+  }
+  
+  /**
+   * Getter for the id of the custom field team_name.
+   */
+  public function getTeamNameCustomFieldId() {
+    return $this->genericConfig->getTeamNameCustomFieldId();
+  }
+  
+  /**
+   * Getter for the column name of the custom field team_name.
+   */
+  public function getTeamNameCustomFieldColumnName() {
+    return $this->genericConfig->getTeamNameCustomFieldColumnName();
   }
   
   /**
