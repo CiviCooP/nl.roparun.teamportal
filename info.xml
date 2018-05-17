@@ -15,11 +15,10 @@
   </urls>
   <releaseDate>2018-05-08</releaseDate>
   <version>1.0</version>
-  <develStage>alpha</develStage>
+  <develStage>stable</develStage>
   <compatibility>
     <ver>4.7</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
   <civix>
     <namespace>CRM/Teamportal</namespace>
   </civix>
