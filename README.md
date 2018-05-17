@@ -17,8 +17,8 @@ This extension does not do anything in particilair in CiviCRM it only provides A
 
 ## Provided API's
 
-* _PortalTeamCaptain.get_ Gets a list with the teamcaptains. [Docmentation](docs/api/TeamPortalCaptains.md)
-* _PortalTeamMember.get_ gets a list with team members. 
+* _PortalTeamCaptain.get_ Gets a list with the teamcaptains. [Docmentation](docs/api/PortalTeamCaptain.md)
+* _PortalTeamMember.get_ gets a list with team members. [Docmentation](docs/api/PortalTeamMember.md)
 
 ## Requirements
 

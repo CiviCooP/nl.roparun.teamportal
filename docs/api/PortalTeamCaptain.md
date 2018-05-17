@@ -1,4 +1,4 @@
-# TeamPortalCaptains.get
+# PortalTeamCaptain.get
 
 List all active team captains.
 
@@ -6,7 +6,7 @@ The following information is returned
 
 * Name
 * Role
-* Woonplaats
+* City
 * Email address
 * Team name
 * Team nr.
@@ -29,10 +29,10 @@ Optional parameters
 An api call loooks like:
 
 ````
-http://roparun.local.com/sites/all/modules/civicrm/extern/rest.php?entity=TeamPortalCaptains&action=get&api_key=userkey&key=sitekey
+http://roparun.local.com/sites/all/modules/civicrm/extern/rest.php?entity=PortalTeamCaptain&action=get&api_key=userkey&key=sitekey
 ````
 
-Resultaat ziet er zo uit:
+The result looks like:
 ````
      {
 
