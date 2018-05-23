@@ -110,6 +110,7 @@ function _civicrm_api3_portal_team_member_Get_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_portal_team_member_Get($params) {
+  $config = CRM_Teamportal_Config::singleton();
   $event_id = CRM_Generic_CurrentEvent::getCurrentRoparunEventId();
   if (isset($params['event_id'])) {
     $event_id = $params['event_id'];
@@ -124,10 +125,15 @@ function civicrm_api3_portal_team_member_Get($params) {
   
   $teamMembersDao = _civicrm_api3_portal_team_member_Get_queryDao(false, $params);
   while ($teamMembersDao->fetch()) {
+    $active = true;
+    if (!in_array($teamMembersDao->status_id, $config->getActiveParticipantStatusIds())) {
+      $active = false;
+    }
+    
     $teamMember = array();
     $teamMember['id'] = $teamMembersDao->id;
     $teamMember['team_id'] = $team_id;
-    $teamMember['is_active'] = (!isset($params['is_active']) || $params['is_active']) ? true : false;
+    $teamMember['is_active'] = $active;
     $teamMember['event_id'] = $event_id;
     $teamMember['display_name'] = $teamMembersDao->display_name;
     $teamMember['phone'] = $teamMembersDao->phone;
@@ -194,7 +200,8 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     civicrm_address.country_id,
     civicrm_phone.phone,
     civicrm_email.email,
-    team_member_data.{$config->getTeamRoleCustomFieldColumnName()} as role
+    team_member_data.{$config->getTeamRoleCustomFieldColumnName()} as role,
+    civicrm_participant.status_id as status_id
     ";
   
   $whereClauses = array();
@@ -243,6 +250,5 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     ORDER BY {$sort}
     {$limit}
   "; 
-  
   return CRM_Core_DAO::executeQuery($teamMemberSql);
 }

@@ -6,10 +6,6 @@ class CRM_Teamportal_Config {
   
   private $genericConfig;
   
-  private $_teamMemberDataCustomGroupId;
-  private $_teamMemberDataCustomGroupTableName;
-  private $_memberOfTeamCustomFieldId;
-  private $_memberOfTeamCustomFieldColumnName;
   private $_teamRoleCustomFieldId;
   private $_teamRoleCustomFieldColumnName;
   private $_activeParticipantStatusIds = array();
@@ -81,28 +77,28 @@ class CRM_Teamportal_Config {
    * Getter for the custom group id of custom group team_member_data.
    */
   public function getTeamMemberDataCustomGroupId() {
-    return $this->_teamMemberDataCustomGroupId;
+    return $this->genericConfig->getTeamMemberDataCustomGroupId();
   }
   
   /**
    * Getter for the table name of the custom group team_member_data.
    */
   public function getTeamMemberDataCustomGroupTableName() {
-    return $this->_teamMemberDataCustomGroupTableName;
+    return $this->genericConfig->getTeamMemberDataCustomGroupTableName();
   }
   
   /**
    * Getter for the custom field id of the custom field team_member_of_team.
    */
   public function getMemberOfTeamCustomFieldId() {
-    return $this->_memberOfTeamCustomFieldId;
+    return $this->genericConfig->getMemberOfTeamCustomFieldId();
   }
   
   /**
    * Getter for the column name of the custom field team_member_of_team.
    */
   public function getMemberOfTeamCustomFieldColumnName() {
-    return $this->_memberOfTeamCustomFieldColumnName;
+    return $this->genericConfig->getMemberOfTeamCustomFieldColumnName();
   }
   
   /**
@@ -128,21 +124,7 @@ class CRM_Teamportal_Config {
   
   private function loadCustomGroups() {    
     try {
-      $_teamMemberCustomGroup = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'team_member_data'));
-      $this->_teamMemberDataCustomGroupId = $_teamMemberCustomGroup['id'];
-      $this->_teamMemberDataCustomGroupTableName = $_teamMemberCustomGroup['table_name'];
-    } catch (Exception $ex) {
-      throw new Exception('Could not find custom group for Team Member Data');
-    }
-    try {
-      $_memberOfTeamCustomField = civicrm_api3('CustomField', 'getsingle', array('name' => 'team_member_of_team', 'custom_group_id' => $this->_teamMemberDataCustomGroupId));
-      $this->_memberOfTeamCustomFieldColumnName = $_memberOfTeamCustomField['column_name'];
-      $this->_memberOfTeamCustomFieldId = $_memberOfTeamCustomField['id'];
-    } catch (Exception $ex) {
-      throw new Exception('Could not find custom field Member of Team');
-    }
-    try {
-      $_teamRoleCustomField = civicrm_api3('CustomField', 'getsingle', array('name' => 'team_role', 'custom_group_id' => $this->_teamMemberDataCustomGroupId));
+      $_teamRoleCustomField = civicrm_api3('CustomField', 'getsingle', array('name' => 'team_role', 'custom_group_id' => $this->genericConfig->getTeamMemberDataCustomGroupId()));
       $this->_teamRoleCustomFieldColumnName = $_teamRoleCustomField['column_name'];
       $this->_teamRoleCustomFieldId = $_teamRoleCustomField['id'];
     } catch (Exception $ex) {

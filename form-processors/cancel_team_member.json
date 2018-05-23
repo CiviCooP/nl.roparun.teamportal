@@ -1,0 +1,76 @@
+{
+  "name": "portal_deactiveer_teamlid",
+  "title": "Portal: deactiveer teamlid",
+  "is_active": "1",
+  "description": "Deze form processer annuleert een team lid. Dat betekent dat het deelnemers record op geannuleerd wordt gezet.",
+  "output_handler": "FormatOutput",
+  "output_handler_configuration": {
+    "fields": [
+      {
+        "field": "input.contact_id",
+        "output_name": "contact_id"
+      },
+      {
+        "field": "input.team_id",
+        "output_name": "team_id"
+      }
+    ]
+  },
+  "enable_default_data": "0",
+  "default_data_output_configuration": [],
+  "permission": "access Team Portal API",
+  "inputs": [
+    {
+      "name": "contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "actions": [
+    {
+      "name": "huidig_roparun_event",
+      "title": "Huidig roparun event",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": []
+    },
+    {
+      "name": "contact_is_lid_van_team",
+      "title": "Contact is lid van team",
+      "type": "ContactIsMemberOfTeam",
+      "configuration": {
+        "throw_error": "1"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_event.event_id",
+        "contact_id": "input.contact_id",
+        "team_id": "input.team_id"
+      }
+    },
+    {
+      "name": "annuleer_teamlid",
+      "title": "Annuleer teamlid",
+      "type": "UpdateParticipantStatus",
+      "configuration": {
+        "status": "4"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_event.event_id",
+        "contact_id": "input.contact_id"
+      }
+    }
+  ],
+  "default_data_inputs": [],
+  "default_data_actions": []
+}
