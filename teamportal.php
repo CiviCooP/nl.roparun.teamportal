@@ -18,7 +18,8 @@ function teamportal_civicrm_permission(&$permissions) {
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_alterAPIPermissions/
  */
 function teamportal_civicrm_alterAPIPermissions($entity, $action, &$params, &$permissions) {
-    if ($entity == 'portal_team_captain' || $entity == 'portal_team_member') {
+    $portalApis = array('portal_team_captain', 'portal_team_member', 'portal_team_info');
+    if (in_array($entity, $portalApis)) {
       $permissions[$entity][$action] = array('access Team Portal API');
     }
 }

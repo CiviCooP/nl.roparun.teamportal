@@ -25,13 +25,6 @@ function _civicrm_api3_portal_team_info_Get_spec(&$spec) {
     'title' => 'Event ID',
     'type' => CRM_Utils_Type::T_INT,
   );
-  $spec['id'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Contact ID'),
-    'type' => CRM_Utils_Type::T_INT,
-  );
   $spec['name'] = array(
     'api.required' => false,
     'api.return' => true,
@@ -230,6 +223,7 @@ function civicrm_api3_portal_team_info_Get($params) {
     $team['tumblr'] = $teamDao->tumblr;
     $team['twitter'] = $teamDao->twitter;
     $team['vine'] = $teamDao->vine;
+    $team['event_id'] = $event_id;
     
     $teams[$teamDao->id] = $team;
   }
