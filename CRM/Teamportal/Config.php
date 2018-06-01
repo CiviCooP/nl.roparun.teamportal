@@ -67,6 +67,20 @@ class CRM_Teamportal_Config {
   }
   
   /**
+   * Getter for the id of the custom field start_location.
+   */
+  public function getStartLocationCustomFieldId() {
+    return $this->genericConfig->getStartLocationCustomFieldId();
+  }
+  
+  /**
+   * Getter for the column name of the custom field start_location.
+   */
+  public function getStartLocationCustomFieldColumnName() {
+    return $this->genericConfig->getStartLocationCustomFieldColumnName();
+  }
+  
+  /**
    * Getter for the column name of the custom field team_name.
    */
   public function getTeamNameCustomFieldColumnName() {
@@ -148,6 +162,20 @@ class CRM_Teamportal_Config {
    */
   public function getActiveParticipantStatusIds() {
     return $this->_activeParticipantStatusIds;
+  }
+  
+  /**
+   * Getter for vestigingsplaats location type id.
+   */
+  public function getVestingsplaatsLocationTypeId() {
+    return $this->genericConfig->getVestingsplaatsLocationTypeId();
+  }
+  
+  /**
+   * Getter for role id of team.
+   */
+  public function getTeamParticipantRoleId() {
+    return $this->genericConfig->getTeamParticipantRoleId();
   }
   
   private function loadCustomGroups() {    
