@@ -9,8 +9,8 @@
  * @see civicrm_api3_create_error
  * @throws API_Exception
  */
-function civicrm_api3_portal_team_member_Getoptions($params) {
-  $fieldName = _civicrm_api3_api_resolve_alias('PortalTeamMember', $params['field']);
+function civicrm_api3_portal_team_info_Getoptions($params) {
+  $fieldName = _civicrm_api3_api_resolve_alias('PortalTeamInfo', $params['field']);
   
   $options = array();
   switch ($fieldName) {
