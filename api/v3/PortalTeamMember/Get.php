@@ -9,7 +9,7 @@ use CRM_Teamportal_ExtensionUtil as E;
  * @return void
  * @see http://wiki.civicrm.org/confluence/display/CRMDOC/API+Architecture+Standards
  */
-function _civicrm_api3_portal_team_member_Get_spec(&$spec) {
+function _civicrm_api3_portal_team_member_Get_spec(&$spec) {  
   $spec['team_id'] = array(
     'api.aliases' => array('id'),
     'api.required' => true,
@@ -98,6 +98,26 @@ function _civicrm_api3_portal_team_member_Get_spec(&$spec) {
     'title' => E::ts('Is active'),
     'type' => CRM_Utils_Type::T_BOOLEAN,
   );
+  $spec['donations_enabled'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Donations enabled'),
+    'type' => CRM_Utils_Type::T_STRING,
+    'pseudoconstant' => array(
+      'optionGroupName' => 'participant_donation_state',
+    ),
+  );
+  $spec['show_on_website'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Show on website'),
+    'type' => CRM_Utils_Type::T_STRING,
+    'pseudoconstant' => array(
+      'optionGroupName' => 'show_participant_on_website',
+    ),
+  );
 }
 
 /**
@@ -150,6 +170,8 @@ function civicrm_api3_portal_team_member_Get($params) {
     $teamMember['country'] = $country;
     
     $teamMember['role'] = $teamMembersDao->role;
+    $teamMember['show_on_website'] = $teamMembersDao->show_on_website;
+    $teamMember['donations_enabled'] = $teamMembersDao->donations_enabled;
     $teamMembers[] = $teamMember;
   }
   
@@ -201,10 +223,13 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     civicrm_phone.phone,
     civicrm_email.email,
     team_member_data.{$config->getTeamRoleCustomFieldColumnName()} as role,
+    team_member_data.{$config->getDonationsEnabledCustomFieldColumnName()} as donations_enabled,
+    team_member_data.{$config->getShowOnWebsiteCustomFieldColumnName()} as show_on_website,
     civicrm_participant.status_id as status_id
     ";
   
   $whereClauses = array();
+  $whereClauses[] = "civicrm_contact.is_deleted = '0'";
   if (isset($params['is_active']) && $params['is_active']) {
     $whereClauses[] = "civicrm_participant.status_id IN (".implode(", ", $config->getActiveParticipantStatusIds()).")";
   } elseif (isset($params['is_active']) && !$params['is_active']) {
