@@ -177,6 +177,41 @@ class CRM_Teamportal_Config {
   public function getTeamParticipantRoleId() {
     return $this->genericConfig->getTeamParticipantRoleId();
   }
+
+  /**
+   * Getter for the id of the custom group teamcaptain_teamportal
+   */
+  public function getTeamcaptainCustomGroupId() {
+    return $this->genericConfig->getTeamcaptainCustomGroupId();
+  }
+
+  /**
+   * Getter for the id of the custom group teamcaptain_teamportal
+   */
+  public function getTeamcaptainCustomGroupTableName() {
+    return $this->genericConfig->getTeamcaptainCustomGroupTableName();
+  }
+
+  /**
+   * Getter for the id of the custom field teamcaptain_teamportal_access.
+   */
+  public function getTeamcaptainTeamportalAccessCustomFieldId() {
+    return $this->genericConfig->getTeamcaptainTeamportalAccessCustomFieldId();
+  }
+
+  /**
+   * Getter for the column name of the custom field teamcaptain_teamportal_access.
+   */
+  public function getTeamcaptainTeamportalAccessCustomFieldColumnName() {
+    return $this->genericConfig->getTeamcaptainTeamportalAccessCustomFieldColumnName();
+  }
+
+  /**
+   * Getter for the relationship type id.
+   */
+  public function getTeamCaptainRelationshipTypeId() {
+    return $this->genericConfig->getTeamCaptainRelationshipTypeId();
+  }
   
   private function loadCustomGroups() {    
     try {
