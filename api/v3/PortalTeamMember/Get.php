@@ -91,6 +91,13 @@ function _civicrm_api3_portal_team_member_Get_spec(&$spec) {
       'optionGroupName' => 'team_roles',
     ),
   );
+  $spec['is_team_captain'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Is Team Captain'),
+    'type' => CRM_Utils_Type::T_BOOLEAN,
+  );
   $spec['is_active'] = array(
     'api.required' => false,
     'api.return' => true,
@@ -154,6 +161,7 @@ function civicrm_api3_portal_team_member_Get($params) {
     $teamMember['id'] = $teamMembersDao->id;
     $teamMember['team_id'] = $team_id;
     $teamMember['is_active'] = $active;
+    $teamMember['is_team_captain'] = $teamMembersDao->is_team_captain;
     $teamMember['event_id'] = $event_id;
     $teamMember['display_name'] = $teamMembersDao->display_name;
     $teamMember['phone'] = $teamMembersDao->phone;
@@ -180,6 +188,8 @@ function civicrm_api3_portal_team_member_Get($params) {
 
 function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
   $config = CRM_Teamportal_Config::singleton();
+  $sqlParams = array();
+  $sqlParamCount = 1;
 
   if (!isset($params['event_id'])) {
     $current_event_id = CRM_Generic_CurrentEvent::getCurrentRoparunEventId();
@@ -192,9 +202,9 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
   
   $options = _civicrm_api3_get_options_from_params($params);
   $limit = "";
-  if (isset($options['limit']) && isset($options['offset'])) {
+  if (isset($options['limit']) && $options['limit'] > 0 && isset($options['offset'])) {
     $limit = "LIMIT ".CRM_Utils_Type::escape($options['offset'], 'Integer', TRUE).", ".CRM_Utils_Type::escape($options['limit'], 'Integer', TRUE);
-  } elseif (isset($options['limit'])) {
+  } elseif (isset($options['limit']) && $options['limit'] > 0) {
     $limit = "LIMIT ".CRM_Utils_Type::escape($options['limit'], 'Integer', TRUE);
   }
   
@@ -225,7 +235,11 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     team_member_data.{$config->getTeamRoleCustomFieldColumnName()} as role,
     team_member_data.{$config->getDonationsEnabledCustomFieldColumnName()} as donations_enabled,
     team_member_data.{$config->getShowOnWebsiteCustomFieldColumnName()} as show_on_website,
-    civicrm_participant.status_id as status_id
+    civicrm_participant.status_id as status_id,
+    (CASE
+      WHEN civicrm_relationship.id IS NOT NULL THEN 1
+      ELSE 0 
+    END) AS is_team_captain
     ";
   
   $whereClauses = array();
@@ -271,9 +285,17 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     LEFT JOIN civicrm_address ON civicrm_address.contact_id = civicrm_contact.id AND civicrm_address.is_primary = 1
     LEFT JOIN civicrm_phone ON civicrm_phone.contact_id = civicrm_contact.id AND civicrm_phone.is_primary = 1
     LEFT JOIN civicrm_email ON civicrm_email.contact_id = civicrm_contact.id AND civicrm_email.is_primary = 1
+    LEFT JOIN civicrm_relationship ON civicrm_relationship.contact_id_a = civicrm_contact.id 
+      AND civicrm_relationship.relationship_type_id = %{$sqlParamCount} 
+      AND civicrm_relationship.is_active = 1 
+      AND (civicrm_relationship.start_date IS NULL OR civicrm_relationship.start_date <= CURRENT_DATE()) 
+      AND (civicrm_relationship.end_date IS NULL OR civicrm_relationship.end_date >= CURRENT_DATE())
+      AND civicrm_relationship.contact_id_b = team_member_data.{$config->getMemberOfTeamCustomFieldColumnName()}
     WHERE {$where}
     ORDER BY {$sort}
     {$limit}
-  "; 
-  return CRM_Core_DAO::executeQuery($teamMemberSql);
+  ";
+  $sqlParams[$sqlParamCount] = array($config->getTeamCaptainRelationshipTypeId(), 'Integer');
+  $sqlParamCount++;
+  return CRM_Core_DAO::executeQuery($teamMemberSql, $sqlParams);
 }

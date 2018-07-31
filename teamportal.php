@@ -3,6 +3,17 @@
 require_once 'teamportal.civix.php';
 use CRM_Teamportal_ExtensionUtil as E;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+/**
+ * Implements hook_civicrm_container()
+ *
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_container/
+ */
+function teamportal_civicrm_container(ContainerBuilder $container) {
+  $container->addCompilerPass(new Civi\Teamportal\FormProcessor\CompilerPass\Types());
+}
+
 /**
  * Implements hook_civicrm_permissions()
  * 
