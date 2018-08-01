@@ -60,7 +60,7 @@ class CRM_Teamportal_Api_Captains {
       `team_member_data`.`{$config->getShowOnWebsiteCustomFieldColumnName()}` as `show_on_website`
 			FROM `civicrm_contact`
 			INNER JOIN `civicrm_relationship` ON `civicrm_relationship`.`contact_id_a` = `civicrm_contact`.`id`
-			INNER JOIN `{$config->getTeamcaptainCustomGroupTableName()}` `team_portal` ON `team_portal`.`entity_id` = `civicrm_relationship`.`id` 
+			LEFT JOIN `{$config->getTeamcaptainCustomGroupTableName()}` `team_portal` ON `team_portal`.`entity_id` = `civicrm_relationship`.`id` 
 			INNER JOIN `civicrm_contact` `team` ON `civicrm_relationship`.`contact_id_b` = `team`.`id`
 			LEFT JOIN `civicrm_address` ON `civicrm_address`.`contact_id` = `civicrm_contact`.`id` AND `civicrm_address`.`is_primary` = 1
 			LEFT JOIN `civicrm_email` ON `civicrm_email`.`contact_id` = `civicrm_contact`.`id` AND `civicrm_email`.`is_primary` = 1
