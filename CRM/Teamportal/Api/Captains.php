@@ -25,9 +25,14 @@ class CRM_Teamportal_Api_Captains {
 			  AND (`civicrm_relationship`.`end_date` IS NULL OR `civicrm_relationship`.`end_date` >= CURRENT_DATE())";
     } elseif ($is_active === 0) {
       $activeWhereClause = " 
-        AND (`civicrm_relationship`.`is_active` = 0 
-			  OR (`civicrm_relationship`.`start_date` IS NOT NULL AND `civicrm_relationship`.`start_date` >= CURRENT_DATE())
-			  OR (`civicrm_relationship`.`end_date` IS NOT NULL AND `civicrm_relationship`.`end_date` <= CURRENT_DATE()))";
+        AND (
+          `civicrm_relationship`.`is_active` = 0 
+          OR (
+            `civicrm_relationship`.`is_active`= 1 
+			      AND (`civicrm_relationship`.`start_date` IS NULL OR `civicrm_relationship`.`start_date` >= CURRENT_DATE())
+			      AND (`civicrm_relationship`.`end_date` IS NULL OR `civicrm_relationship`.`end_date` <= CURRENT_DATE())
+          )
+        ) ";
     }
 
     $captainSql = "
