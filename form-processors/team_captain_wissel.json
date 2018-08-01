@@ -1,0 +1,400 @@
+{
+  "name": "team_captain_wissel",
+  "title": "Portal: Wissel Teamcaptain",
+  "is_active": "1",
+  "description": "Deze form processor zorgt ervoor dat de nieuwe Teamcaptain kan worden aangemeld, en de oude op inactief wordt gezet.",
+  "output_handler": "OutputAllActionOutput",
+  "output_handler_configuration": [],
+  "enable_default_data": "1",
+  "default_data_output_configuration": {
+    "naam_en_voornaam_tc": "",
+    "achternaam": "",
+    "adres": "",
+    "bijzonderheden": "action.haal_teamlid_op.custom_20",
+    "donatie_status_teamlid": "",
+    "e_mail_adres": "",
+    "functie": "",
+    "plaats": "",
+    "postcode": "",
+    "teamlid_op_website": "",
+    "telefoon": "",
+    "telefoon_in_geval_van_nood": "action.haal_teamlid_op.custom_18",
+    "telefoon_mobiel": "",
+    "verzekeringsnummer": "action.haal_teamlid_op.custom_19",
+    "voornaam": "",
+    "waarschuwen_in_geval_van_nood": "action.haal_teamlid_op.custom_17",
+    "display_name_current_team_captain": "action.huidige_team_captain.display_name"
+  },
+  "permission": "access Team Portal API",
+  "inputs": [
+    {
+      "name": "achternaam",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "adres",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "bijzonderheden",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "current_captain_contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "display_name_current_team_captain",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "donatie_status_teamlid",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "99"
+      },
+      "validators": []
+    },
+    {
+      "name": "email",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": [
+        {
+          "validator": "email",
+          "configuration": []
+        },
+        {
+          "validator": "email",
+          "configuration": []
+        }
+      ]
+    },
+    {
+      "name": "functie",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "96"
+      },
+      "validators": []
+    },
+    {
+      "name": "ice_naam",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "ice_telefoon",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "land",
+      "type": "Country",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "new_captain_contact_id",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "plaats",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "postcode",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "teamleden",
+      "type": "teamportal_type_teamleden",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "teamlid_op_website",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "98"
+      },
+      "validators": []
+    },
+    {
+      "name": "telefoon",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "toegang_tot_teamportal",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "1",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "tussenvoegsel",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "verzekeringsnummer",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "voornaam",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "actions": [
+    {
+      "name": "huidig_roparun_evenement",
+      "title": "Huidig roparun evenement",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "campagne",
+      "title": "Campagne",
+      "type": "GetCampaignFromEvent",
+      "configuration": [],
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "maak_nieuwe_team_captain_aan",
+      "title": "Maak nieuwe team captain aan",
+      "type": "CreateUpdateIndividual",
+      "configuration": {
+        "contact_sub_type": "Teamlid",
+        "address_location_type": "1",
+        "address_update_existing": "0",
+        "email_location_type": "1",
+        "email_update_existing": "0",
+        "phone_location_type": "1",
+        "phone_update_existing": "0"
+      },
+      "mapping": {
+        "contact_id": "input.new_captain_contact_id",
+        "first_name": "input.voornaam",
+        "last_name": "input.achternaam",
+        "middle_name": "input.tussenvoegsel",
+        "street_address": "input.adres",
+        "postal_code": "input.postcode",
+        "city": "input.plaats",
+        "country_id": "input.land",
+        "email": "input.email",
+        "phone": "input.telefoon"
+      },
+      "condition_configuration": {
+        "name": "ParameterIsEmpty",
+        "title": "Parameter is empty",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter": "input.new_captain_contact_id"
+        },
+        "output_mapping": {
+          "contact_id": "input.new_captain_contact_id"
+        }
+      }
+    },
+    {
+      "name": "werk_in_geval_van_nood_bij",
+      "title": "Werk in geval van nood bij",
+      "type": "UpdateCustomData",
+      "configuration": [],
+      "mapping": {
+        "contact_id": "action.maak_nieuwe_team_captain_aan.contact_id",
+        "custom_Teamlidgegevens_ICE_Waarschuwen_in_geval_van_nood": "input.ice_naam",
+        "custom_Teamlidgegevens_ICE_Telefoon_in_geval_van_nood": "input.ice_telefoon",
+        "custom_Teamlidgegevens_ICE_Verzekeringsnummer": "input.verzekeringsnummer",
+        "custom_Teamlidgegevens_ICE_Bijzonderheden": "input.bijzonderheden"
+      },
+      "condition_configuration": {
+        "name": "ParameterIsEmpty",
+        "title": "Parameter is empty",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter": "input.new_captain_contact_id"
+        },
+        "output_mapping": {
+          "contact_id": "input.new_captain_contact_id"
+        }
+      }
+    },
+    {
+      "name": "registreer_nieuwe_team_captain",
+      "title": "Registreer nieuwe team captain",
+      "type": "CreateOrUpdateParticipant",
+      "configuration": {
+        "status_id": "1",
+        "role_id": "6",
+        "update_existing": "1"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id",
+        "contact_id": "action.maak_nieuwe_team_captain_aan.contact_id",
+        "campaign_id": "action.campagne.campaign_id",
+        "custom_team_member_data_team_member_of_team": "input.team_contact_id",
+        "custom_team_member_data_team_role": "input.functie",
+        "custom_team_member_data_website": "input.teamlid_op_website",
+        "custom_team_member_data_donations": "input.donatie_status_teamlid"
+      },
+      "condition_configuration": {
+        "name": "ParameterIsEmpty",
+        "title": "Parameter is empty",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter": "input.new_captain_contact_id"
+        },
+        "output_mapping": {
+          "contact_id": "input.new_captain_contact_id"
+        }
+      }
+    },
+    {
+      "name": "nieuwe_team_captain_relatie",
+      "title": "Nieuwe team captain relatie",
+      "type": "CreateRelationship",
+      "configuration": {
+        "relationship_type_id": "11",
+        "set_start_date": "1"
+      },
+      "mapping": {
+        "contact_id_a": "action.maak_nieuwe_team_captain_aan.contact_id",
+        "contact_id_b": "input.team_contact_id",
+        "custom_teamcaptain_teamportal_teamcaptain_teamportal_access": "input.toegang_tot_teamportal"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "be_indig_team_captain",
+      "title": "Beëindig team captain",
+      "type": "EndRelationship",
+      "configuration": {
+        "relationship_type_id": "11",
+        "set_end_date": "1"
+      },
+      "mapping": {
+        "contact_id_a": "input.current_captain_contact_id",
+        "contact_id_b": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    }
+  ],
+  "default_data_inputs": [
+    {
+      "name": "current_team_captain_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "default_data_actions": [
+    {
+      "name": "huidig_evenement_roparun",
+      "title": "Huidig evenement Roparun",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "huidige_team_captain",
+      "title": "Huidige team captain",
+      "type": "ContactDataById",
+      "configuration": [],
+      "mapping": {
+        "contact_id": "input.current_team_captain_id"
+      },
+      "condition_configuration": ""
+    }
+  ]
+}
