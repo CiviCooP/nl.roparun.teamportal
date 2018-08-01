@@ -23,7 +23,8 @@
     "verzekeringsnummer": "action.haal_teamlid_op.custom_19",
     "voornaam": "",
     "waarschuwen_in_geval_van_nood": "action.haal_teamlid_op.custom_17",
-    "display_name_current_team_captain": "action.huidige_team_captain.display_name"
+    "display_name_current_team_captain": "action.huidige_team_captain.display_name",
+    "current_captain_functie": "action.evenement_registratie.custom_11"
   },
   "permission": "access Team Portal API",
   "inputs": [
@@ -54,6 +55,24 @@
     {
       "name": "current_captain_contact_id",
       "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "current_captain_functie",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "96"
+      },
+      "validators": []
+    },
+    {
+      "name": "current_captain_stays_as_teammeber",
+      "type": "Boolean",
       "is_required": "1",
       "default_value": "",
       "configuration": [],
@@ -357,6 +376,56 @@
         "contact_id_b": "input.team_contact_id"
       },
       "condition_configuration": ""
+    },
+    {
+      "name": "annuleer_teamlidmaatschap",
+      "title": "Annuleer teamlidmaatschap",
+      "type": "UpdateParticipantStatus",
+      "configuration": {
+        "status": "4"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id",
+        "contact_id": "input.current_captain_contact_id"
+      },
+      "condition_configuration": {
+        "name": "ParameterHasValue",
+        "title": "Parameter has value",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter": "input.current_captain_stays_as_teammeber"
+        },
+        "configuration": {
+          "value": "0"
+        }
+      }
+    },
+    {
+      "name": "update_current_team_captain_registratie",
+      "title": "Update current team captain registratie",
+      "type": "CreateOrUpdateParticipant",
+      "configuration": {
+        "status_id": "1",
+        "role_id": "6",
+        "update_existing": "1"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id",
+        "contact_id": "input.current_captain_contact_id",
+        "campaign_id": "action.campagne.campaign_id",
+        "custom_team_member_data_team_role": "input.current_captain_functie"
+      },
+      "condition_configuration": {
+        "name": "ParameterHasValue",
+        "title": "Parameter has value",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter": "input.current_captain_stays_as_teammeber"
+        },
+        "configuration": {
+          "value": "1"
+        }
+      }
     }
   ],
   "default_data_inputs": [
@@ -392,6 +461,19 @@
       "type": "ContactDataById",
       "configuration": [],
       "mapping": {
+        "contact_id": "input.current_team_captain_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "evenement_registratie",
+      "title": "Evenement registratie",
+      "type": "GetParticipant",
+      "configuration": {
+        "role_id": "6"
+      },
+      "mapping": {
+        "event_id": "action.huidig_evenement_roparun.event_id",
         "contact_id": "input.current_team_captain_id"
       },
       "condition_configuration": ""
