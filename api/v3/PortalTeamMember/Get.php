@@ -94,7 +94,7 @@ function _civicrm_api3_portal_team_member_Get_spec(&$spec) {
   $spec['is_team_captain'] = array(
     'api.required' => false,
     'api.return' => true,
-    'api.filter' => false,
+    'api.filter' => true,
     'title' => E::ts('Is Team Captain'),
     'type' => CRM_Utils_Type::T_BOOLEAN,
   );
@@ -262,6 +262,14 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
       $params['team_id'] = array('=' => $params['team_id']);
     }
     $whereClauses[] = CRM_Core_DAO::createSQLFilter("team_member_data.{$config->getMemberOfTeamCustomFieldColumnName()}", $params['team_id']);
+  }
+
+  if (isset($params['is_team_captain'])) {
+    if ($params['is_team_captain']) {
+      $whereClauses[] = "civicrm_relationship.id IS NOT NULL";
+    } else {
+      $whereClauses[] = "civicrm_relationship.id IS NULL";
+    }
   }
   
   if (isset($params['role'])) {
