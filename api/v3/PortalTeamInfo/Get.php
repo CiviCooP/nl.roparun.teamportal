@@ -211,7 +211,7 @@ function civicrm_api3_portal_team_info_Get($params) {
     $team['teamnr'] = $teamDao->team_nr;
     $team['start_location'] = $teamDao->start_location;
     $team['city'] = $teamDao->city;
-    $team['country'] = E::ts($teamDao->country);
+    $team['country'] = ts($teamDao->country, array('context' => 'country'));
     $team['website'] = $teamDao->website;
     $team['facebook'] = $teamDao->facebook;
     $team['googleplus'] = $teamDao->googleplus;
