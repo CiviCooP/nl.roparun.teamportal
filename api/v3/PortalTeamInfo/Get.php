@@ -77,13 +77,6 @@ function _civicrm_api3_portal_team_info_Get_spec(&$spec) {
     'title' => E::ts('Facebook'),
     'type' => CRM_Utils_Type::T_STRING,
   );
-  $spec['googleplus'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Google Plus'),
-    'type' => CRM_Utils_Type::T_STRING,
-  );
   $spec['instagram'] = array(
     'api.required' => false,
     'api.return' => true,
@@ -91,53 +84,11 @@ function _civicrm_api3_portal_team_info_Get_spec(&$spec) {
     'title' => E::ts('Instagram'),
     'type' => CRM_Utils_Type::T_STRING,
   );
-  $spec['linkedin'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Linkedin'),
-    'type' => CRM_Utils_Type::T_STRING,
-  );
-  $spec['myspace'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Myspace'),
-    'type' => CRM_Utils_Type::T_STRING,
-  );
-  $spec['pinterest'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Pinterest'),
-    'type' => CRM_Utils_Type::T_STRING,
-  );
-  $spec['snapchat'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Snapchat'),
-    'type' => CRM_Utils_Type::T_STRING,
-  );
-  $spec['tumblr'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Tumblr'),
-    'type' => CRM_Utils_Type::T_STRING,
-  );
   $spec['twitter'] = array(
     'api.required' => false,
     'api.return' => true,
     'api.filter' => false,
     'title' => E::ts('Twitter'),
-    'type' => CRM_Utils_Type::T_STRING,
-  );
-  $spec['vine'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Vine'),
     'type' => CRM_Utils_Type::T_STRING,
   );
 }
@@ -168,15 +119,8 @@ function civicrm_api3_portal_team_info_Get($params) {
              civicrm_country.name as country,
              website.url as website,
              facebook.url as facebook,
-             googleplus.url as googleplus,
              instagram.url as instagram,
-             linkedin.url as linkedin,
-             myspace.url as myspace,
-             pinterest.url as pinterest,
-             snapchat.url as snapchat,
-             tumblr.url as tumblr,
-             twitter.url as twitter,
-             vine.url as vine
+             twitter.url as twitter
              FROM civicrm_contact 
              INNER JOIN civicrm_participant ON civicrm_participant.contact_id = civicrm_contact.id 
              INNER JOIN civicrm_participant_status_type ON civicrm_participant.status_id = civicrm_participant_status_type.id
@@ -185,15 +129,8 @@ function civicrm_api3_portal_team_info_Get($params) {
              LEFT JOIN `{$config->getTeamDataCustomGroupTableName()}` ON `{$config->getTeamDataCustomGroupTableName()}`.entity_id = civicrm_participant.id
              LEFT JOIN civicrm_website website ON website.contact_id = civicrm_contact.id and website.website_type_id = {$websiteConfig->getWebsiteWebsiteTypeId()}
              LEFT JOIN civicrm_website facebook ON facebook.contact_id = civicrm_contact.id and facebook.website_type_id = {$websiteConfig->getFacebookWebsiteTypeId()}
-             LEFT JOIN civicrm_website googleplus ON googleplus.contact_id = civicrm_contact.id and googleplus.website_type_id = {$websiteConfig->getGooglePlusWebsiteTypeId()}
              LEFT JOIN civicrm_website instagram ON instagram.contact_id = civicrm_contact.id and instagram.website_type_id = {$websiteConfig->getInstagramWebsiteTypeId()}
-             LEFT JOIN civicrm_website linkedin ON linkedin.contact_id = civicrm_contact.id and linkedin.website_type_id = {$websiteConfig->getLinkedInWebsiteTypeId()}
-             LEFT JOIN civicrm_website myspace ON myspace.contact_id = civicrm_contact.id and myspace.website_type_id = {$websiteConfig->getMySpaceWebsiteTypeId()}
-             LEFT JOIN civicrm_website pinterest ON pinterest.contact_id = civicrm_contact.id and pinterest.website_type_id = {$websiteConfig->getPinterestWebsiteTypeId()}
-             LEFT JOIN civicrm_website snapchat ON snapchat.contact_id = civicrm_contact.id and snapchat.website_type_id = {$websiteConfig->getSnapChatWebsiteTypeId()}
-             LEFT JOIN civicrm_website tumblr ON tumblr.contact_id = civicrm_contact.id and tumblr.website_type_id = {$websiteConfig->getTumblrWebsiteTypeId()}
              LEFT JOIN civicrm_website twitter ON twitter.contact_id = civicrm_contact.id and twitter.website_type_id = {$websiteConfig->getTwitterWebsiteTypeId()}
-             LEFT JOIN civicrm_website vine ON vine.contact_id = civicrm_contact.id and vine.website_type_id = {$websiteConfig->getVineWebsiteTypeId()}
              WHERE civicrm_participant.status_id IN (".implode(',', $config->getActiveParticipantStatusIds()).") 
              AND civicrm_participant.event_id = %2 AND civicrm_participant.role_id = %3 
              AND civicrm_contact.id = %4
@@ -214,15 +151,8 @@ function civicrm_api3_portal_team_info_Get($params) {
     $team['country'] = ts($teamDao->country, array('context' => 'country'));
     $team['website'] = $teamDao->website;
     $team['facebook'] = $teamDao->facebook;
-    $team['googleplus'] = $teamDao->googleplus;
     $team['instagram'] = $teamDao->instagram;
-    $team['linkedin'] = $teamDao->linkedin;
-    $team['myspace'] = $teamDao->myspace;
-    $team['pinterest'] = $teamDao->pinterest;
-    $team['snapchat'] = $teamDao->snapchat;
-    $team['tumblr'] = $teamDao->tumblr;
     $team['twitter'] = $teamDao->twitter;
-    $team['vine'] = $teamDao->vine;
     $team['event_id'] = $event_id;
     
     $teams[$teamDao->id] = $team;
