@@ -212,6 +212,15 @@ class CRM_Teamportal_Config {
   public function getTeamCaptainRelationshipTypeId() {
     return $this->genericConfig->getTeamCaptainRelationshipTypeId();
   }
+
+  /**
+   * Getter for the billing location type id.
+   *
+   * @return int
+   */
+  public function getBillingLocationTypeId() {
+    return $this->genericConfig->getBillingLocationTypeId();
+  }
   
   private function loadCustomGroups() {    
     try {

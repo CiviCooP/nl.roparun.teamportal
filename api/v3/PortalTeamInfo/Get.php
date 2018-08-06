@@ -63,7 +63,63 @@ function _civicrm_api3_portal_team_info_Get_spec(&$spec) {
     'title' => E::ts('Country'),
     'type' => CRM_Utils_Type::T_STRING,
   );
-  $spec['website'] = array(
+  $spec['billing_contact_id'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing Contact ID'),
+    'type' => CRM_Utils_Type::T_INT,
+  );
+  $spec['billing_contact_name'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing Contact Name'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
+  $spec['billing_name'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing Name'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
+  $spec['billing_supplemental_address'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing Supplemental Address'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
+  $spec['billing_street_address'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing Street Address'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
+  $spec['billing_postal_code'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing Postal Code'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
+  $spec['billing_city'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing City'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
+  $spec['billing_country'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Billing Country'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
+ $spec['website'] = array(
     'api.required' => false,
     'api.return' => true,
     'api.filter' => false,
@@ -109,6 +165,7 @@ function civicrm_api3_portal_team_info_Get($params) {
   if (isset($params['event_id'])) {
     $event_id = $params['event_id'];
   }
+  $countries = CRM_Core_PseudoConstant::country();
     
   $teamSql = "SELECT civicrm_contact.id, 
              civicrm_contact.display_name,
@@ -116,7 +173,14 @@ function civicrm_api3_portal_team_info_Get($params) {
              `{$config->getTeamDataCustomGroupTableName()}`.`{$config->getTeamNameCustomFieldColumnName()}` AS `team_name`,
              `{$config->getTeamDataCustomGroupTableName()}`.`{$config->getStartLocationCustomFieldColumnName()}` AS `start_location`,
              civicrm_address.city as city,
-             civicrm_country.name as country,
+             civicrm_address.country_id as country_id,
+             billing_address.master_id as billing_master_id,
+             billing_address.name as billing_name,
+             billing_address.supplemental_address_1 as billing_supplemental_address,
+             billing_address.street_address as billing_street_address,
+             billing_address.postal_code as billing_postal_code,
+             billing_address.city as billing_city,
+             billing_address.country_id as billing_country_id,
              website.url as website,
              facebook.url as facebook,
              instagram.url as instagram,
@@ -125,22 +189,32 @@ function civicrm_api3_portal_team_info_Get($params) {
              INNER JOIN civicrm_participant ON civicrm_participant.contact_id = civicrm_contact.id 
              INNER JOIN civicrm_participant_status_type ON civicrm_participant.status_id = civicrm_participant_status_type.id
              LEFT JOIN civicrm_address ON civicrm_address.contact_id = civicrm_contact.id AND civicrm_address.location_type_id = %1
-             LEFT JOIN civicrm_country ON civicrm_country.id = civicrm_address.country_id
+             LEFT JOIN civicrm_address billing_address ON billing_address.contact_id = civicrm_contact.id AND billing_address.location_type_id = %2
              LEFT JOIN `{$config->getTeamDataCustomGroupTableName()}` ON `{$config->getTeamDataCustomGroupTableName()}`.entity_id = civicrm_participant.id
              LEFT JOIN civicrm_website website ON website.contact_id = civicrm_contact.id and website.website_type_id = {$websiteConfig->getWebsiteWebsiteTypeId()}
              LEFT JOIN civicrm_website facebook ON facebook.contact_id = civicrm_contact.id and facebook.website_type_id = {$websiteConfig->getFacebookWebsiteTypeId()}
              LEFT JOIN civicrm_website instagram ON instagram.contact_id = civicrm_contact.id and instagram.website_type_id = {$websiteConfig->getInstagramWebsiteTypeId()}
              LEFT JOIN civicrm_website twitter ON twitter.contact_id = civicrm_contact.id and twitter.website_type_id = {$websiteConfig->getTwitterWebsiteTypeId()}
              WHERE civicrm_participant.status_id IN (".implode(',', $config->getActiveParticipantStatusIds()).") 
-             AND civicrm_participant.event_id = %2 AND civicrm_participant.role_id = %3 
-             AND civicrm_contact.id = %4
+             AND civicrm_participant.event_id = %3 AND civicrm_participant.role_id = %4 
+             AND civicrm_contact.id = %5
              ORDER BY team_nr, team_name";
   $teamParams[1] = array($config->getVestingsplaatsLocationTypeId(), 'Integer');
-  $teamParams[2] = array($event_id, 'Integer');
-  $teamParams[3] = array($config->getTeamParticipantRoleId(), 'Integer');
-  $teamParams[4] = array($params['team_id'], 'Integer');
+  $teamParams[2] = array($config->getBillingLocationTypeId(), 'Integer');
+  $teamParams[3] = array($event_id, 'Integer');
+  $teamParams[4] = array($config->getTeamParticipantRoleId(), 'Integer');
+  $teamParams[5] = array($params['team_id'], 'Integer');
   $teamDao = CRM_Core_DAO::executeQuery($teamSql, $teamParams);
   while($teamDao->fetch()) {
+    $country = '';
+    if ($teamDao->country_id) {
+      $country = $countries[$teamDao->country_id];
+    }
+    $billing_country = '';
+    if ($teamDao->billing_country_id) {
+      $billing_country = $countries[$teamDao->billing_country_id];
+    }
+
     $team = array();
     $team['id'] = $teamDao->id;
     $team['event_id'] = $event_id;
@@ -148,13 +222,47 @@ function civicrm_api3_portal_team_info_Get($params) {
     $team['teamnr'] = $teamDao->team_nr;
     $team['start_location'] = $teamDao->start_location;
     $team['city'] = $teamDao->city;
-    $team['country'] = ts($teamDao->country, array('context' => 'country'));
+    $team['country'] = $country;
     $team['website'] = $teamDao->website;
     $team['facebook'] = $teamDao->facebook;
     $team['instagram'] = $teamDao->instagram;
     $team['twitter'] = $teamDao->twitter;
     $team['event_id'] = $event_id;
-    
+
+    if ($teamDao->billing_master_id) {
+      $team['billing_master_name'] = '';
+      $team['billing_name'] = '';
+      $team['billing_supplemental_address'] = '';
+      $team['billing_street_address'] = '';
+      $team['billing_postal_code'] = '';
+      $team['billing_city'] = '';
+      $team['billing_country'] = '';
+      try {
+        $billing_address = civicrm_api3('Address', 'getsingle', array('id' => $teamDao->billing_master_id));
+        $team['billing_contact_id'] = $billing_address['contact_id'];
+        $team['billing_contact_name'] = civicrm_api3('Contact', 'getvalue', array('return' => 'display_name', 'id' => $billing_address['contact_id']));
+        $team['billing_name'] = $billing_address['name'];
+        $team['billing_supplemental_address'] = $billing_address['supplemental_address_1'];
+        $team['billing_street_address'] = $billing_address['street_address'];
+        $team['billing_postal_code'] = $billing_address['postal_code'];
+        $team['billing_city'] = $billing_address['city'];
+        if (isset($billing_address['country_id'])) {
+          $billing_country = $countries[$billing_address['country_id']];
+        }
+        $team['billing_country'] = $billing_country;
+      } catch (\Exception $e) {
+        // Do nothing
+      }
+    } else {
+      $team['billing_contact_id'] = '';
+      $team['billing_contact_name'] = '';
+      $team['billing_name'] = $teamDao->billing_name;
+      $team['billing_supplemental_address'] = $teamDao->billing_supplemental_address;
+      $team['billing_street_address'] = $teamDao->billing_street_address;
+      $team['billing_postal_code'] = $teamDao->billing_postal_code;
+      $team['billing_city'] = $teamDao->billing_city;
+      $team['billing_country'] = $billing_country;
+    }
     $teams[$teamDao->id] = $team;
   }
   

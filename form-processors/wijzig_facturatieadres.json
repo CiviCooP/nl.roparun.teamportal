@@ -1,0 +1,178 @@
+{
+  "name": "portal_wijzig_facturatie_adres",
+  "title": "Portal: wijzig facturatie adres",
+  "is_active": "1",
+  "output_handler": "OutputAllActionOutput",
+  "output_handler_configuration": [],
+  "enable_default_data": "1",
+  "default_data_output_configuration": {
+    "city": "action.facturatieadres.city",
+    "country": "action.facturatieadres.country_id",
+    "name": "action.facturatieadres.name",
+    "postal_code": "action.facturatieadres.postal_code",
+    "street_address": "action.facturatieadres.street_address",
+    "supplemental_address": "action.facturatieadres.supplemental_address_1",
+    "master_contact_id": "action.master_adres_contact_id.contact_id"
+  },
+  "permission": "access Team Portal API",
+  "inputs": [
+    {
+      "name": "city",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "country",
+      "type": "Country",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "master_contact_id",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "name",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "postal_code",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "street_address",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "supplemental_address",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "teamcaptain_contact_id",
+      "type": "teamportal_type_teamcaptainaddress",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "actions": [
+    {
+      "name": "update_facturatie_adres",
+      "title": "Update facturatie adres",
+      "type": "CreateUpdateAddress",
+      "configuration": {
+        "address_location_type": "5",
+        "address_update_existing": "1"
+      },
+      "mapping": {
+        "contact_id": "input.team_id",
+        "street_address": "input.street_address",
+        "name": "input.name",
+        "supplemental_address_1": "input.supplemental_address",
+        "postal_code": "input.postal_code",
+        "city": "input.city",
+        "country_id": "input.country"
+      },
+      "condition_configuration": {
+        "name": "ParameterIsEmpty",
+        "title": "Parameter is empty",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter": "input.master_contact_id"
+        }
+      }
+    },
+    {
+      "name": "set_master_address",
+      "title": "Set master address",
+      "type": "UsePrimaryAddressOfContact",
+      "configuration": {
+        "location_type": "5",
+        "address_update_existing": "1",
+        "update_existing": "1"
+      },
+      "mapping": {
+        "contact_id": "input.team_id",
+        "master_contact_id": "input.master_contact_id"
+      },
+      "condition_configuration": {
+        "name": "ParameterIsNotEmpty",
+        "title": "Parameter is not empty",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter": "input.master_contact_id"
+        }
+      }
+    }
+  ],
+  "default_data_inputs": [
+    {
+      "name": "team_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "default_data_actions": [
+    {
+      "name": "facturatieadres",
+      "title": "Facturatieadres",
+      "type": "GetAddress",
+      "configuration": {
+        "location_type_id": "5"
+      },
+      "mapping": {
+        "contact_id": "input.team_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "master_adres_contact_id",
+      "title": "Master adres contact ID",
+      "type": "GetContactIdFromMasterAddress",
+      "configuration": {
+        "location_type_id": "5"
+      },
+      "mapping": {
+        "contact_id": "input.team_id"
+      },
+      "condition_configuration": ""
+    }
+  ]
+}

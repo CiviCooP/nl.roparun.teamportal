@@ -18,6 +18,7 @@ class Types implements CompilerPassInterface {
     }
     $typeFactoryDefinition = $container->getDefinition('form_processor_type_factory');
     $typeFactoryDefinition->addMethodCall('addType', array(new Definition('Civi\Teamportal\FormProcessor\Type\TeamLeden')));
+    $typeFactoryDefinition->addMethodCall('addType', array(new Definition('Civi\Teamportal\FormProcessor\Type\TeamCaptainAddress')));
   }
 
 }
