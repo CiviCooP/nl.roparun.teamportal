@@ -206,12 +206,12 @@ function civicrm_api3_portal_team_info_Get($params) {
   while($teamDao->fetch()) {
     $team = array();
     $team['id'] = $teamDao->id;
-    $team['event_id'] = $roparun_event_id;
+    $team['event_id'] = $event_id;
     $team['name'] = $teamDao->team_name;
     $team['teamnr'] = $teamDao->team_nr;
     $team['start_location'] = $teamDao->start_location;
     $team['city'] = $teamDao->city;
-    $team['country'] = $teamDao->country;
+    $team['country'] = E::ts($teamDao->country);
     $team['website'] = $teamDao->website;
     $team['facebook'] = $teamDao->facebook;
     $team['googleplus'] = $teamDao->googleplus;
