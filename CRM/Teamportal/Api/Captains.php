@@ -100,7 +100,7 @@ class CRM_Teamportal_Api_Captains {
       $captain['address'] = $captainsDAO->street_address;
       $captain['postal_code'] = $captainsDAO->postal_code;
       $captain['city'] = $captainsDAO->city;
-      $captain['country_id'] = $country;
+      $captain['country'] = $country;
       $captain['phone'] = $captainsDAO->phone;
       $captain['email'] = $captainsDAO->email;
       $captain['team_id'] = $captainsDAO->team_id;
