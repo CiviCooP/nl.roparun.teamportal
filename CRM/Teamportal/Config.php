@@ -9,6 +9,7 @@ class CRM_Teamportal_Config {
   private $_teamRoleCustomFieldId;
   private $_teamRoleCustomFieldColumnName;
   private $_activeParticipantStatusIds = array();
+  private $_orderActivityTypeId;
   
   private function __construct() {
     $this->genericConfig = CRM_Generic_Config::singleton();
@@ -18,6 +19,12 @@ class CRM_Teamportal_Config {
     $participantStatuses = civicrm_api3('ParticipantStatusType', 'get', array('is_active' => 1, 'class' => array('IN' => array("Positive")), 'options' => array('limit' => 0)));
     foreach($participantStatuses['values'] as $participantStatus) {
       $this->_activeParticipantStatusIds[] = $participantStatus['id'];
+    }
+
+    try {
+      $this->_orderActivityTypeId = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'order', 'option_group_id' => 'activity_type'));
+    } catch (Exception $e) {
+      throw new Exception('Could not find order activity type');
     }
   }
   
@@ -220,6 +227,15 @@ class CRM_Teamportal_Config {
    */
   public function getBillingLocationTypeId() {
     return $this->genericConfig->getBillingLocationTypeId();
+  }
+
+  /**
+   * Getter for the order activity type id.
+   *
+   * @return int
+   */
+  public function getOrderActivityTypeId() {
+    return $this->_orderActivityTypeId;
   }
   
   private function loadCustomGroups() {    

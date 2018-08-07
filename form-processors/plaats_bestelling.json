@@ -1,0 +1,309 @@
+{
+  "name": "portal_bestellingen",
+  "title": "Portal: bestellingen",
+  "is_active": "1",
+  "description": "Deze form processor zorgt ervoor dat team captain een bestelling kan plaatsen.",
+  "output_handler": "OutputAllActionOutput",
+  "output_handler_configuration": [],
+  "enable_default_data": "1",
+  "default_data_output_configuration": {
+    "dames_xs": "action.haal_bestelling_op.custom_roparun_order_dames_shirt_xs",
+    "dames_s": "action.haal_bestelling_op.custom_roparun_order_dames_shirt_s",
+    "dames_m": "action.haal_bestelling_op.custom_roparun_order_dames_shirt_m",
+    "dames_l": "action.haal_bestelling_op.custom_roparun_order_dames_shirt_l",
+    "dames_xl": "action.haal_bestelling_op.custom_roparun_order_dames_shirt_xl",
+    "dames_xxl": "action.haal_bestelling_op.custom_roparun_order_dames_shirt_xxl",
+    "dames_xxxl": "action.haal_bestelling_op.custom_roparun_order_dames_shirt_xxxl",
+    "heren_xs": "action.haal_bestelling_op.custom_roparun_order_heren_shirt_xs",
+    "heren_s": "action.haal_bestelling_op.custom_roparun_order_heren_shirt_s",
+    "heren_m": "action.haal_bestelling_op.custom_roparun_order_heren_shirt_m",
+    "heren_l": "action.haal_bestelling_op.custom_roparun_order_heren_shirt_l",
+    "heren_xl": "action.haal_bestelling_op.custom_roparun_order_heren_shirt_xl",
+    "heren_xxl": "action.haal_bestelling_op.custom_roparun_order_heren_shirt_xxl",
+    "heren_xxxl": "action.haal_bestelling_op.custom_roparun_order_heren_shirt_xxxl",
+    "medailles": "action.haal_bestelling_op.custom_roparun_order_medailles",
+    "pastamaaltijden": "action.haal_bestelling_op.custom_roparun_order_pastamaaltijden",
+    "overnachten_startlocatie": "action.haal_bestelling_op.custom_roparun_order_overnachten_startlocatie",
+    "overnachten_startlocatie_bbq": "action.haal_bestelling_op.custom_roparun_order_overnachten_startlocatie_bbq",
+    "overnachten_startlocatie_brood": "action.haal_bestelling_op.custom_roparun_order_overnachten_startlocatie_brood",
+    "entreekaarten_slotavond": "action.haal_bestelling_op.custom_roparun_order_entreekaarten_slotavond"
+  },
+  "permission": "access Team Portal API",
+  "inputs": [
+    {
+      "name": "activity_date",
+      "type": "Date",
+      "is_required": "0",
+      "default_value": "now",
+      "configuration": {
+        "format": "Y-m-d"
+      },
+      "validators": []
+    },
+    {
+      "name": "dames_xs",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "dames_s",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "dames_m",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "dames_l",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "dames_xl",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "dames_xxl",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "dames_xxxl",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "heren_xs",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "heren_s",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "heren_m",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "heren_l",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "heren_xl",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "heren_xxl",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "heren_xxxl",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "medailles",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "pastamaaltijden",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "overnachten_startlocatie",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "overnachten_startlocatie_bbq",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "overnachten_startlocatie_brood",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "entreekaarten_slotavond",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "0",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "id",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_captain_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "actions": [
+    {
+      "name": "huidig_roparun_evenement",
+      "title": "Huidig roparun evenement",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "huidige_campagne",
+      "title": "Huidige campagne",
+      "type": "GetCampaignFromEvent",
+      "configuration": [],
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "plaats_bestelling",
+      "title": "Plaats bestelling",
+      "type": "CreateActivity",
+      "configuration": {
+        "activity_type": "57",
+        "activity_status": "20",
+        "subject": "Bestelling uit Team portaal"
+      },
+      "mapping": {
+        "source_contact_id": "input.team_captain_id",
+        "target_contact_id": "input.team_id",
+        "activity_date": "input.activity_date",
+        "id": "input.id",
+        "campaign_id": "action.huidige_campagne.campaign_id",
+        "custom_roparun_order_dames_shirt_xs": "input.dames_xs",
+        "custom_roparun_order_dames_shirt_s": "input.dames_s",
+        "custom_roparun_order_dames_shirt_m": "input.dames_m",
+        "custom_roparun_order_dames_shirt_l": "input.dames_l",
+        "custom_roparun_order_dames_shirt_xl": "input.dames_xl",
+        "custom_roparun_order_dames_shirt_xxl": "input.dames_xxl",
+        "custom_roparun_order_dames_shirt_xxxl": "input.dames_xxxl",
+        "custom_roparun_order_heren_shirt_xs": "input.heren_xs",
+        "custom_roparun_order_heren_shirt_s": "input.heren_s",
+        "custom_roparun_order_heren_shirt_m": "input.heren_m",
+        "custom_roparun_order_heren_shirt_l": "input.heren_l",
+        "custom_roparun_order_heren_shirt_xl": "input.heren_xl",
+        "custom_roparun_order_heren_shirt_xxl": "input.heren_xxl",
+        "custom_roparun_order_heren_shirt_xxxl": "input.heren_xxxl",
+        "custom_roparun_order_medailles": "input.medailles",
+        "custom_roparun_order_pastamaaltijden": "input.pastamaaltijden",
+        "custom_roparun_order_overnachten_startlocatie": "input.overnachten_startlocatie",
+        "custom_roparun_order_overnachten_startlocatie_bbq": "input.overnachten_startlocatie_bbq",
+        "custom_roparun_order_overnachten_startlocatie_brood": "input.overnachten_startlocatie_brood",
+        "custom_roparun_order_entreekaarten_slotavond": "input.entreekaarten_slotavond"
+      },
+      "condition_configuration": ""
+    }
+  ],
+  "default_data_inputs": [
+    {
+      "name": "id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "default_data_actions": [
+    {
+      "name": "haal_bestelling_op",
+      "title": "Haal bestelling op",
+      "type": "GetActivity",
+      "configuration": [],
+      "mapping": {
+        "id": "input.id"
+      },
+      "condition_configuration": ""
+    }
+  ]
+}
+

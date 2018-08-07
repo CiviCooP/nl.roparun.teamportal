@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PortalTeamMember.Getoptions API
+ * PortalTeamCaptain.Getoptions API
  *
  * @param array $params
  * @return array API result descriptor
@@ -39,5 +39,5 @@ function civicrm_api3_portal_team_captain_Getoptions($params) {
   if (!empty($params['sequential'])) {
     $options = CRM_Utils_Array::makeNonAssociative($options);
   }
-  return civicrm_api3_create_success($options, $params, 'PortalTeamMember', 'getoptions');
+  return civicrm_api3_create_success($options, $params, 'PortalTeamCaptain', 'getoptions');
 }
