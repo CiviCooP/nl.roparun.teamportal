@@ -124,6 +124,16 @@
       "validators": []
     },
     {
+      "name": "geboorte_datum",
+      "type": "Date",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "format": "d-m-Y"
+      },
+      "validators": []
+    },
+    {
       "name": "ice_naam",
       "type": "String",
       "is_required": "0",
@@ -280,7 +290,8 @@
         "city": "input.plaats",
         "country_id": "input.land",
         "email": "input.email",
-        "phone": "input.telefoon"
+        "phone": "input.telefoon",
+        "birth_date": "input.geboorte_datum"
       },
       "condition_configuration": {
         "name": "ParameterIsEmpty",

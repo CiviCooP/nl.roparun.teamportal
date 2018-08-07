@@ -22,7 +22,8 @@
     "telefoon_mobiel": "action.haal_teamlid_op.phone",
     "verzekeringsnummer": "action.haal_teamlid_op.custom_19",
     "voornaam": "action.haal_teamlid_op.first_name",
-    "waarschuwen_in_geval_van_nood": "action.haal_teamlid_op.custom_17"
+    "waarschuwen_in_geval_van_nood": "action.haal_teamlid_op.custom_17",
+    "geboorte_datum": "action.haal_teamlid_op.birth_date"
   },
   "permission": "access Team Portal API",
   "inputs": [
@@ -83,6 +84,16 @@
       "default_value": "",
       "configuration": {
         "option_group_id": "96"
+      },
+      "validators": []
+    },
+    {
+      "name": "geboorte_datum",
+      "type": "Date",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "format": "d-m-Y"
       },
       "validators": []
     },
@@ -217,7 +228,8 @@
         "postal_code": "input.postcode",
         "city": "input.plaats",
         "email": "input.e_mail_adres",
-        "phone": "input.telefoon"
+        "phone": "input.telefoon",
+        "birth_date": "input.geboorte_datum"
       },
       "condition_configuration": ""
     },

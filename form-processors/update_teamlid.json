@@ -22,7 +22,8 @@
     "tussenvoegsel": "action.haal_teamlid_op.middle_name",
     "functie": "action.deelnemer_gegevens.custom_11",
     "teamlid_op_website": "action.deelnemer_gegevens.custom_12",
-    "donatie_status_teamlid": "action.deelnemer_gegevens.custom_13"
+    "donatie_status_teamlid": "action.deelnemer_gegevens.custom_13",
+    "geboorte_datum": "action.haal_teamlid_op.birth_date"
   },
   "permission": "access Team Portal API",
   "inputs": [
@@ -83,6 +84,16 @@
       "default_value": "",
       "configuration": {
         "option_group_id": "96"
+      },
+      "validators": []
+    },
+    {
+      "name": "geboorte_datum",
+      "type": "Date",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "format": "d-m-Y"
       },
       "validators": []
     },
@@ -219,7 +230,8 @@
         "email": "input.email",
         "phone": "input.telefoon",
         "middle_name": "input.tussenvoegsel",
-        "contact_id": "input.contact_id"
+        "contact_id": "input.contact_id",
+        "birth_date": "input.geboorte_datum"
       },
       "condition_configuration": ""
     },
