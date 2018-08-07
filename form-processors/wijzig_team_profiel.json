@@ -1,0 +1,311 @@
+{
+  "name": "portal_wijzig_team_profiel",
+  "title": "Portal: wijzig team profiel",
+  "is_active": "1",
+  "output_handler": "OutputAllActionOutput",
+  "output_handler_configuration": [],
+  "enable_default_data": "1",
+  "default_data_output_configuration": {
+    "land": "action.vestigingsadres.country_id",
+    "vestigingsplaats": "action.vestigingsadres.city",
+    "naam": "action.deelnemersrecor.custom_7",
+    "start_locatie": "action.deelnemersrecor.custom_6",
+    "website": "action.website.url",
+    "facebook": "action.facebook.url",
+    "googleplus": "action.google_plus.url",
+    "instagram": "action.instagram.url",
+    "linkedin": "action.linkedin.url",
+    "myspace": "action.myspace.url",
+    "pinterest": "action.pinteres.url",
+    "snapchat": "action.snapchat.url",
+    "tumblr": "action.tumblr.url",
+    "twitter": "action.twitter.url",
+    "vine": "action.vine.url",
+    "team_contact_id": "action.deelnemersrecor.id"
+  },
+  "permission": "access Team Portal API",
+  "inputs": [
+    {
+      "name": "facebook",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "instagram",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "land",
+      "type": "Country",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "naam",
+      "type": "String",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "start_locatie",
+      "type": "OptionGroup",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "100"
+      },
+      "validators": []
+    },
+    {
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "twitter",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "vestigingsplaats",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "website",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "actions": [
+    {
+      "name": "evenement",
+      "title": "Evenement",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "campagne",
+      "title": "Campagne",
+      "type": "GetCampaignFromEvent",
+      "configuration": [],
+      "mapping": {
+        "event_id": "action.evenement.event_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "werk_evenement_registratie_bij",
+      "title": "Werk evenement registratie bij",
+      "type": "CreateOrUpdateParticipant",
+      "configuration": {
+        "status_id": "1",
+        "role_id": "5",
+        "update_existing": "1"
+      },
+      "mapping": {
+        "event_id": "action.evenement.event_id",
+        "contact_id": "input.team_contact_id",
+        "campaign_id": "action.campagne.campaign_id",
+        "custom_team_data_start_location": "input.start_locatie",
+        "custom_team_data_team_name": "input.naam"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "website",
+      "title": "Website",
+      "type": "CreateUpdateWebsite",
+      "configuration": {
+        "website_type": "2"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id",
+        "url": "input.website"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "facebook",
+      "title": "Facebook",
+      "type": "CreateUpdateWebsite",
+      "configuration": {
+        "website_type": "3"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id",
+        "url": "input.facebook"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "instagram",
+      "title": "Instagram",
+      "type": "CreateUpdateWebsite",
+      "configuration": {
+        "website_type": "5"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id",
+        "url": "input.instagram"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "twitter",
+      "title": "Twitter",
+      "type": "CreateUpdateWebsite",
+      "configuration": {
+        "website_type": "11"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id",
+        "url": "input.twitter"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "werk_vestigingsadres_bi",
+      "title": "Werk vestigingsadres bij",
+      "type": "CreateUpdateAddress",
+      "configuration": {
+        "address_location_type": "6",
+        "address_update_existing": "1"
+      },
+      "mapping": {
+        "city": "input.vestigingsplaats",
+        "country_id": "input.land",
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    }
+  ],
+  "default_data_inputs": [
+    {
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "default_data_actions": [
+    {
+      "name": "evenement",
+      "title": "Evenement",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "campagne",
+      "title": "Campagne",
+      "type": "GetCampaignFromEvent",
+      "configuration": [],
+      "mapping": {
+        "event_id": "action.evenement.event_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "vestigingsadres",
+      "title": "Vestigingsadres",
+      "type": "GetAddress",
+      "configuration": {
+        "location_type_id": "6"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "deelnemersrecor",
+      "title": "Deelnemersrecord",
+      "type": "GetParticipant",
+      "configuration": {
+        "role_id": "5"
+      },
+      "mapping": {
+        "event_id": "action.evenement.event_id",
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "website",
+      "title": "Website",
+      "type": "GetWebsite",
+      "configuration": {
+        "website_type": "2"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "facebook",
+      "title": "Facebook",
+      "type": "GetWebsite",
+      "configuration": {
+        "website_type": "3"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "instagram",
+      "title": "Instagram",
+      "type": "GetWebsite",
+      "configuration": {
+        "website_type": "5"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "twitter",
+      "title": "Twitter",
+      "type": "GetWebsite",
+      "configuration": {
+        "website_type": "11"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    }
+  ]
+}

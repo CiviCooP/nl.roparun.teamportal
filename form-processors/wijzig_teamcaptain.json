@@ -1,0 +1,323 @@
+{
+  "name": "wijzig_teamcaptain",
+  "title": "Portal: Wijzig Teamcaptain",
+  "is_active": "1",
+  "description": "Deze form processor zorgt ervoor dat de nieuwe Teamcaptain kan worden aangemeld, en de oude op inactief wordt gezet.",
+  "output_handler": "OutputAllActionOutput",
+  "output_handler_configuration": [],
+  "enable_default_data": "1",
+  "default_data_output_configuration": {
+    "naam_en_voornaam_tc": "action.haal_teamlid_op.display_name",
+    "achternaam": "action.haal_teamlid_op.last_name",
+    "adres": "action.haal_teamlid_op.street_address",
+    "bijzonderheden": "action.haal_teamlid_op.custom_20",
+    "donatie_status_teamlid": "action.deelnemergegeven.custom_13",
+    "e_mail_adres": "action.haal_teamlid_op.email",
+    "functie": "action.deelnemergegeven.role_id",
+    "plaats": "action.haal_teamlid_op.city",
+    "postcode": "action.haal_teamlid_op.postal_code",
+    "teamlid_op_website": "action.deelnemergegeven.custom_12",
+    "telefoon": "action.haal_teamlid_op.phone",
+    "telefoon_in_geval_van_nood": "action.haal_teamlid_op.custom_18",
+    "telefoon_mobiel": "action.haal_teamlid_op.phone",
+    "verzekeringsnummer": "action.haal_teamlid_op.custom_19",
+    "voornaam": "action.haal_teamlid_op.first_name",
+    "waarschuwen_in_geval_van_nood": "action.haal_teamlid_op.custom_17"
+  },
+  "permission": "access Team Portal API",
+  "inputs": [
+    {
+      "name": "achternaam",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "adres",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "bijzonderheden",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "contact_id",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "donatie_status_teamlid",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "99"
+      },
+      "validators": []
+    },
+    {
+      "name": "e_mail_adres",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "functie",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "96"
+      },
+      "validators": []
+    },
+    {
+      "name": "naam_en_voornaam_tc",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "plaats",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "postcode",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "teamlid_op_website",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "option_group_id": "98"
+      },
+      "validators": []
+    },
+    {
+      "name": "telefoon",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "telefoon_in_geval_van_nood",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "telefoon_mobiel",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "verzekeringsnummer",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "voornaam",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "waarschuwen_in_geval_van_nood",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "actions": [
+    {
+      "name": "huidig_roparun_evenement",
+      "title": "Huidig roparun evenement",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "campagne",
+      "title": "Campagne",
+      "type": "GetCampaignFromEvent",
+      "configuration": [],
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "maak_contact_aan",
+      "title": "Maak contact aan",
+      "type": "CreateUpdateIndividual",
+      "configuration": {
+        "contact_sub_type": "Teamlid",
+        "address_location_type": "1",
+        "address_update_existing": "1",
+        "email_location_type": "1",
+        "email_update_existing": "1",
+        "phone_location_type": "1",
+        "phone_update_existing": "1"
+      },
+      "mapping": {
+        "contact_id": "input.contact_id",
+        "first_name": "input.voornaam",
+        "last_name": "input.achternaam",
+        "street_address": "input.adres",
+        "postal_code": "input.postcode",
+        "city": "input.plaats",
+        "email": "input.e_mail_adres",
+        "phone": "input.telefoon"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "werk_in_geval_van_nood_bij",
+      "title": "Werk in geval van nood bij",
+      "type": "UpdateCustomData",
+      "configuration": [],
+      "mapping": {
+        "contact_id": "action.maak_contact_aan.contact_id",
+        "custom_17": "input.waarschuwen_in_geval_van_nood",
+        "custom_18": "input.telefoon_in_geval_van_nood",
+        "custom_19": "input.verzekeringsnummer",
+        "custom_20": "input.bijzonderheden"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "registreer_teamlid",
+      "title": "Registreer Teamlid",
+      "type": "CreateOrUpdateParticipant",
+      "configuration": {
+        "status_id": "1",
+        "role_id": "1",
+        "update_existing": "1"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id",
+        "contact_id": "action.maak_contact_aan.contact_id",
+        "campaign_id": "action.campagne.campaign_id",
+        "custom_10": "input.team_contact_id",
+        "custom_12": "input.teamlid_op_website",
+        "custom_13": "input.donatie_status_teamlid"
+      },
+      "condition_configuration": ""
+    }
+  ],
+  "default_data_inputs": [
+    {
+      "name": "contact_id",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "default_data_actions": [
+    {
+      "name": "haal_teamlid_op",
+      "title": "Haal Teamlid op",
+      "type": "ContactDataById",
+      "configuration": [],
+      "mapping": {
+        "contact_id": "input.contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "huidig_evenement_roparun",
+      "title": "Huidig evenement Roparun",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "check_of_iemand_lid_is_van_team",
+      "title": "Check of iemand lid is van team",
+      "type": "ContactIsMemberOfTeam",
+      "configuration": {
+        "throw_error": "1"
+      },
+      "mapping": {
+        "event_id": "action.huidig_evenement_roparun.event_id",
+        "contact_id": "input.contact_id",
+        "team_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "deelnemergegeven",
+      "title": "Deelnemergegevens",
+      "type": "GetParticipant",
+      "configuration": {
+        "role_id": "6"
+      },
+      "mapping": {
+        "event_id": "action.huidig_evenement_roparun.event_id",
+        "contact_id": "input.contact_id"
+      },
+      "condition_configuration": ""
+    }
+  ]
+}
