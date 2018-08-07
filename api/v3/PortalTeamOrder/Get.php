@@ -186,6 +186,22 @@ function _civicrm_api3_portal_team_order_Get_spec(&$spec) {
     'title' => 'Overnachten Startlocatie',
     'type' => CRM_Utils_Type::T_INT,
   ];
+  $spec['overnachten_startlocatie_bbq'] = [
+    'api.aliases' => ['overnachten_startlocatie_bbq'],
+    'api.required' => FALSE,
+    'api.return' => TRUE,
+    'api.filter' => FALSE,
+    'title' => 'Overnachten Startlocatie: BBQ Pakketten',
+    'type' => CRM_Utils_Type::T_INT,
+  ];
+  $spec['overnachten_startlocatie_brood'] = [
+    'api.aliases' => ['overnachten_startlocatie_brood'],
+    'api.required' => FALSE,
+    'api.return' => TRUE,
+    'api.filter' => FALSE,
+    'title' => 'Overnachten Startlocatie: Broden',
+    'type' => CRM_Utils_Type::T_INT,
+  ];
   $spec['entreekaarten_slotavond'] = [
     'api.aliases' => ['entreekaarten_slotavond'],
     'api.required' => FALSE,
@@ -284,6 +300,8 @@ function civicrm_api3_portal_team_order_Get($params) {
     $row['medailles'] = $dao->medailles;
     $row['pastamaaltijden'] = $dao->pastamaaltijden;
     $row['overnachten_startlocatie'] = $dao->overnachten_startlocatie;
+    $row['overnachten_startlocatie_bbq'] = $dao->overnachten_startlocatie_bbq;
+    $row['overnachten_startlocatie_brood'] = $dao->overnachten_startlocatie_brood;
     $row['entreekaarten_slotavond'] = $dao->entreekaarten_slotavond;
 
     $return[] = $row;
