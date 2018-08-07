@@ -262,7 +262,7 @@ function civicrm_api3_portal_team_order_Get($params) {
   }
   $where = implode(" AND ", $whereClauses);
 
-  $sql = "SELECT a.id, a.status_id, a.activity_date_time, team_order.*  
+  $sql = "SELECT a.id as activity_id, a.status_id, a.activity_date_time, team_order.*  
   FROM civicrm_activity a
   INNER JOIN civicrm_activity_contact ac ON ac.activity_id = a.id AND ac.record_type_id = %1
   INNER JOIN civicrm_value_roparun_order team_order ON team_order.entity_id = a.id 
@@ -279,7 +279,7 @@ function civicrm_api3_portal_team_order_Get($params) {
   $return = array();
   while ($dao->fetch()) {
     $row = array();
-    $row['id'] = $dao->id;
+    $row['id'] = $dao->activity_id;
     $row['status_id'] = $dao->status_id;
     $row['date'] = CRM_Utils_Date::mysqlToIso(CRM_Utils_Date::processDate($dao->activity_date_time, NULL, FALSE, 'Ymd'));
 
