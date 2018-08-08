@@ -63,7 +63,7 @@
       "is_required": "1",
       "default_value": "",
       "configuration": {
-        "option_group_id": "100"
+        "option_group_name": "start_locations"
       },
       "validators": []
     },
