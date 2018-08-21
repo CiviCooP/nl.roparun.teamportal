@@ -49,7 +49,7 @@
     {
       "name": "new_captain_contact_id",
       "type": "Integer",
-      "is_required": "0",
+      "is_required": "1",
       "default_value": "",
       "configuration": [],
       "validators": []
@@ -107,7 +107,7 @@
         "set_start_date": "1"
       },
       "mapping": {
-        "contact_id_a": "action.maak_nieuwe_team_captain_aan.contact_id",
+        "contact_id_a": "input.new_captain_contact_id",
         "contact_id_b": "input.team_contact_id",
         "custom_teamcaptain_teamportal_teamcaptain_teamportal_access": "input.toegang_tot_teamportal"
       },
