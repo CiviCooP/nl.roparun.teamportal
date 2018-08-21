@@ -22,7 +22,6 @@
     "tussenvoegsel": "action.haal_teamlid_op.middle_name",
     "functie": "action.deelnemer_gegevens.custom_11",
     "teamlid_op_website": "action.deelnemer_gegevens.custom_12",
-    "donatie_status_teamlid": "action.deelnemer_gegevens.custom_13",
     "geboorte_datum": "action.haal_teamlid_op.birth_date"
   },
   "permission": "access Team Portal API",
@@ -57,16 +56,6 @@
       "is_required": "0",
       "default_value": "",
       "configuration": [],
-      "validators": []
-    },
-    {
-      "name": "donatie_status_teamlid",
-      "type": "OptionGroup",
-      "is_required": "0",
-      "default_value": "",
-      "configuration": {
-        "option_group_name": "participant_donation_state"
-      },
       "validators": []
     },
     {
@@ -266,15 +255,9 @@
         "event_id": "action.huidig_roparun_evenemen.event_id",
         "contact_id": "action.maak_contact_aan.contact_id",
         "campaign_id": "action.campage.campaign_id",
-        "custom_5": "",
-        "custom_11": "input.functie",
-        "custom_10": "input.team_contact_id",
-        "custom_12": "input.teamlid_op_website",
-        "custom_13": "input.donatie_status_teamlid",
         "custom_team_member_data_team_member_of_team": "input.team_contact_id",
         "custom_team_member_data_team_role": "input.functie",
-        "custom_team_member_data_website": "input.teamlid_op_website",
-        "custom_team_member_data_donations": "input.donatie_status_teamlid"
+        "custom_team_member_data_website": "input.teamlid_op_website"
       },
       "condition_configuration": ""
     }

@@ -159,16 +159,6 @@ function _civicrm_api3_portal_team_captain_Get_spec(&$spec) {
       'optionGroupName' => 'team_roles',
     ),
   );
-  $spec['donations_enabled'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Donations enabled'),
-    'type' => CRM_Utils_Type::T_STRING,
-    'pseudoconstant' => array(
-      'optionGroupName' => 'participant_donation_state',
-    ),
-  );
   $spec['show_on_website'] = array(
     'api.required' => false,
     'api.return' => true,

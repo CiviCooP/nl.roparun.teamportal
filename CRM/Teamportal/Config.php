@@ -149,20 +149,7 @@ class CRM_Teamportal_Config {
   public function getShowOnWebsiteCustomFieldColumnName() {
     return $this->genericConfig->getShowOnWebsiteCustomFieldColumnName();
   }
-  
-  /**
-   * Getter for the id of the custom field donations.
-   */
-  public function getDonationsEnabledCustomFieldId() {
-    return $this->genericConfig->getDonationsEnabledCustomFieldId();
-  }
-  
-  /**
-   * Getter for the column name of the custom field donations.
-   */
-  public function getDonationsEnabledCustomFieldColumnName() {
-    return $this->genericConfig->getDonationsEnabledCustomFieldColumnName();
-  }
+
   
   /**
    * Returns an array with status ids for active participant statuses.

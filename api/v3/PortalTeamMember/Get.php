@@ -105,16 +105,6 @@ function _civicrm_api3_portal_team_member_Get_spec(&$spec) {
     'title' => E::ts('Is active'),
     'type' => CRM_Utils_Type::T_BOOLEAN,
   );
-  $spec['donations_enabled'] = array(
-    'api.required' => false,
-    'api.return' => true,
-    'api.filter' => false,
-    'title' => E::ts('Donations enabled'),
-    'type' => CRM_Utils_Type::T_STRING,
-    'pseudoconstant' => array(
-      'optionGroupName' => 'participant_donation_state',
-    ),
-  );
   $spec['show_on_website'] = array(
     'api.required' => false,
     'api.return' => true,
@@ -233,7 +223,6 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     civicrm_phone.phone,
     civicrm_email.email,
     team_member_data.{$config->getTeamRoleCustomFieldColumnName()} as role,
-    team_member_data.{$config->getDonationsEnabledCustomFieldColumnName()} as donations_enabled,
     team_member_data.{$config->getShowOnWebsiteCustomFieldColumnName()} as show_on_website,
     civicrm_participant.status_id as status_id,
     (CASE

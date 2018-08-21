@@ -18,7 +18,6 @@
   },
   "enable_default_data": "1",
   "default_data_output_configuration": {
-    "donatie_status_teamlid": "action.donatie_status.value",
     "teamlid_op_website": "action.teamlid_op_website.value"
   },
   "permission": "access Team Portal API",
@@ -46,16 +45,6 @@
       "default_value": "",
       "configuration": {
         "option_group_name": "show_participant_on_website"
-      },
-      "validators": []
-    },
-    {
-      "name": "donatie_status_teamlid",
-      "type": "OptionGroup",
-      "is_required": "0",
-      "default_value": "",
-      "configuration": {
-        "option_group_name": "participant_donation_state"
       },
       "validators": []
     }
@@ -93,22 +82,10 @@
     },
     {
       "name": "annuleer_teamlid",
-      "title": "Annuleer teamlid",
-      "type": "UpdateParticipantStatus",
-      "configuration": {
-        "status": "4"
-      },
-      "mapping": {
-        "event_id": "action.huidig_roparun_event.event_id",
-        "contact_id": "input.contact_id"
-      }
-    },
-    {
-      "name": "update_donatiestatus_toon_website",
-      "title": "Update donatiestatus en toon op website",
+      "title": "Annuleer registratie en update toon op website",
       "type": "CreateOrUpdateParticipant",
       "configuration": {
-        "status_id": "1",
+        "status_id": "4",
         "role_id": "6",
         "update_existing": "1"
       },
@@ -116,8 +93,7 @@
         "event_id": "action.huidig_roparun_event.event_id",
         "contact_id": "input.contact_id",
         "campaign_id": "action.campage.campaign_id",
-        "custom_team_member_data_website": "input.teamlid_op_website",
-        "custom_team_member_data_donations": "input.donatie_status_teamlid"
+        "custom_team_member_data_website": "input.teamlid_op_website"
       },
       "condition_configuration": ""
     }
@@ -125,21 +101,11 @@
   "default_data_inputs": [],
   "default_data_actions": [
     {
-      "name": "donatie_status",
-      "title": "donatie_status",
-      "type": "SetValue",
-      "configuration": {
-        "value": "0"
-      },
-      "mapping": [],
-      "condition_configuration": ""
-    },
-    {
       "name": "teamlid_op_website",
       "title": "teamlid_op_website",
       "type": "SetValue",
       "configuration": {
-        "value": "1"
+        "value": "0"
       },
       "mapping": [],
       "condition_configuration": ""

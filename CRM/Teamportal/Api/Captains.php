@@ -56,7 +56,6 @@ class CRM_Teamportal_Api_Captains {
 			`civicrm_relationship`.`end_date` as `end_date`,
 			`civicrm_relationship`.`is_active` as `is_active`,
       `team_member_data`.`{$config->getTeamRoleCustomFieldColumnName()}` as `role`,
-      `team_member_data`.`{$config->getDonationsEnabledCustomFieldColumnName()}` as `donations_enabled`,
       `team_member_data`.`{$config->getShowOnWebsiteCustomFieldColumnName()}` as `show_on_website`
 			FROM `civicrm_contact`
 			INNER JOIN `civicrm_relationship` ON `civicrm_relationship`.`contact_id_a` = `civicrm_contact`.`id`
