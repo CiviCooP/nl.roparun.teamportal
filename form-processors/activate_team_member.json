@@ -35,6 +35,16 @@
       "default_value": "",
       "configuration": [],
       "validators": []
+    },
+    {
+      "name": "teamlid_op_website",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "1",
+      "configuration": {
+        "option_group_name": "show_participant_on_website"
+      },
+      "validators": []
     }
   ],
   "actions": [
@@ -44,6 +54,16 @@
       "type": "CurrentEvent",
       "configuration": [],
       "mapping": []
+    },
+    {
+      "name": "campage",
+      "title": "Campage",
+      "type": "GetCampaignFromEvent",
+      "configuration": [],
+      "mapping": {
+        "event_id": "action.huidig_roparun_event.event_id"
+      },
+      "condition_configuration": ""
     },
     {
       "name": "contact_is_lid_van_team",
@@ -59,16 +79,21 @@
       }
     },
     {
-      "name": "registreer_teamlid",
-      "title": "Registreer teamlid",
-      "type": "UpdateParticipantStatus",
+      "name": "activeer_teamlid",
+      "title": "Activeer registratie en update toon op website",
+      "type": "CreateOrUpdateParticipant",
       "configuration": {
-        "status": "1"
+        "status_id": "1",
+        "role_id": "6",
+        "update_existing": "1"
       },
       "mapping": {
         "event_id": "action.huidig_roparun_event.event_id",
-        "contact_id": "input.contact_id"
-      }
+        "contact_id": "input.contact_id",
+        "campaign_id": "action.campage.campaign_id",
+        "custom_team_member_data_website": "input.teamlid_op_website"
+      },
+      "condition_configuration": ""
     }
   ],
   "default_data_inputs": [],
