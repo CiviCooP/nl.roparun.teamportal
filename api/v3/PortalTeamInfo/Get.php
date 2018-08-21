@@ -63,6 +63,13 @@ function _civicrm_api3_portal_team_info_Get_spec(&$spec) {
     'title' => E::ts('Country'),
     'type' => CRM_Utils_Type::T_STRING,
   );
+  $spec['phone_during_event'] = array(
+    'api.required' => false,
+    'api.return' => true,
+    'api.filter' => false,
+    'title' => E::ts('Phone number during event'),
+    'type' => CRM_Utils_Type::T_STRING,
+  );
   $spec['billing_contact_id'] = array(
     'api.required' => false,
     'api.return' => true,
@@ -184,7 +191,8 @@ function civicrm_api3_portal_team_info_Get($params) {
              website.url as website,
              facebook.url as facebook,
              instagram.url as instagram,
-             twitter.url as twitter
+             twitter.url as twitter,
+             phone.phone as phone_during_event
              FROM civicrm_contact 
              INNER JOIN civicrm_participant ON civicrm_participant.contact_id = civicrm_contact.id 
              INNER JOIN civicrm_participant_status_type ON civicrm_participant.status_id = civicrm_participant_status_type.id
@@ -195,6 +203,7 @@ function civicrm_api3_portal_team_info_Get($params) {
              LEFT JOIN civicrm_website facebook ON facebook.contact_id = civicrm_contact.id and facebook.website_type_id = {$websiteConfig->getFacebookWebsiteTypeId()}
              LEFT JOIN civicrm_website instagram ON instagram.contact_id = civicrm_contact.id and instagram.website_type_id = {$websiteConfig->getInstagramWebsiteTypeId()}
              LEFT JOIN civicrm_website twitter ON twitter.contact_id = civicrm_contact.id and twitter.website_type_id = {$websiteConfig->getTwitterWebsiteTypeId()}
+             LEFT JOIN civicrm_phone phone ON phone.contact_id = civicrm_contact.id AND phone.phone_type_id = {$config->getDuringEventPhoneTypeId()}
              WHERE civicrm_participant.status_id IN (".implode(',', $config->getActiveParticipantStatusIds()).") 
              AND civicrm_participant.event_id = %3 AND civicrm_participant.role_id = %4 
              AND civicrm_contact.id = %5
@@ -227,6 +236,7 @@ function civicrm_api3_portal_team_info_Get($params) {
     $team['facebook'] = $teamDao->facebook;
     $team['instagram'] = $teamDao->instagram;
     $team['twitter'] = $teamDao->twitter;
+    $team['phone_during_event'] = $teamDao->phone_during_event;
     $team['event_id'] = $event_id;
 
     if ($teamDao->billing_master_id) {

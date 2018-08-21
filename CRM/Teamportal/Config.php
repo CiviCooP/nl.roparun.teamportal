@@ -37,6 +37,15 @@ class CRM_Teamportal_Config {
     }
     return self::$singleton;
   }
+
+  /**
+   * Getter for the phone type during event.
+   *
+   * @return int
+   */
+  public function getDuringEventPhoneTypeId() {
+    return $this->genericConfig->getDuringEventPhoneTypeId();
+  }
   
   /**
    * Getter for the id of the custom group team_data.
