@@ -21,7 +21,8 @@
     "tumblr": "action.tumblr.url",
     "twitter": "action.twitter.url",
     "vine": "action.vine.url",
-    "team_contact_id": "action.deelnemersrecor.id"
+    "team_contact_id": "action.deelnemersrecor.id",
+    "telefoon": "action.telefoonnummer_tidens_evenement.phone"
   },
   "permission": "access Team Portal API",
   "inputs": [
@@ -71,6 +72,14 @@
       "name": "team_contact_id",
       "type": "Integer",
       "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "name": "telefoon",
+      "type": "String",
+      "is_required": "0",
       "default_value": "",
       "configuration": [],
       "validators": []
@@ -203,6 +212,20 @@
         "contact_id": "input.team_contact_id"
       },
       "condition_configuration": ""
+    },
+    {
+      "name": "werk_telefoonnummer_tijdens_evenement_bij",
+      "title": "Werk telefoonnummer tijdens evenement bij",
+      "type": "CreateUpdatePhone",
+      "configuration": {
+        "phone_type": "20",
+        "location_type": "3"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id",
+        "phone": "input.telefoon"
+      },
+      "condition_configuration": ""
     }
   ],
   "default_data_inputs": [
@@ -301,6 +324,19 @@
       "type": "GetWebsite",
       "configuration": {
         "website_type": "11"
+      },
+      "mapping": {
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    },
+    {
+      "name": "telefoonnummer_tidens_evenement",
+      "title": "Telefoonnummer tidens evenement",
+      "type": "GetPhone",
+      "configuration": {
+        "phone_type": "20",
+        "location_type": "3"
       },
       "mapping": {
         "contact_id": "input.team_contact_id"
