@@ -11,11 +11,20 @@ class CRM_Teamportal_Api_Captains {
    *
    * @param int $team_id
    * @param null|0|1 $is_active
+   * @param array $options
    * @return array
+   * @throws \Exception
    */
-  public static function getTeamCaptains($team_id, $is_active=null) {
+  public static function getTeamCaptains($team_id, $is_active=null, $options=array()) {
     $config = CRM_Teamportal_Config::singleton();
     $event_id = CRM_Generic_CurrentEvent::getCurrentRoparunEventId();
+
+    $limit = "";
+    if (isset($options['limit']) && $options['limit'] > 0 && isset($options['offset'])) {
+      $limit = "LIMIT ".CRM_Utils_Type::escape($options['offset'], 'Integer', TRUE).", ".CRM_Utils_Type::escape($options['limit'], 'Integer', TRUE);
+    } elseif (isset($options['limit']) && $options['limit'] > 0) {
+      $limit = "LIMIT ".CRM_Utils_Type::escape($options['limit'], 'Integer', TRUE);
+    }
 
     $activeWhereClause = "";
     if ($is_active === 1) {
@@ -72,6 +81,7 @@ class CRM_Teamportal_Api_Captains {
 			AND (`civicrm_participant`.`id` IS NULL OR `civicrm_participant`.`event_id` = %3)
 			{$activeWhereClause}
 			ORDER BY civicrm_contact.display_name	
+			{$limit}
 		";
     $params[1] = array($config->getTeamCaptainRelationshipTypeId(), 'Integer');
     $params[2] = array($team_id, 'Integer');
@@ -123,10 +133,18 @@ class CRM_Teamportal_Api_Captains {
    *
    * The team portal retrieves this data to create active users from it
    *
+   * @param array $options
    * @return array
    */
-	public static function getPortalUsers() {
+	public static function getPortalUsers($options=array()) {
 		$config = CRM_Teamportal_Config::singleton();
+
+    $limit = "";
+    if (isset($options['limit']) && $options['limit'] > 0 && isset($options['offset'])) {
+      $limit = "LIMIT ".CRM_Utils_Type::escape($options['offset'], 'Integer', TRUE).", ".CRM_Utils_Type::escape($options['limit'], 'Integer', TRUE);
+    } elseif (isset($options['limit']) && $options['limit'] > 0) {
+      $limit = "LIMIT ".CRM_Utils_Type::escape($options['limit'], 'Integer', TRUE);
+    }
 		
 		$captainSql = "
 			SELECT 
@@ -152,6 +170,7 @@ class CRM_Teamportal_Api_Captains {
 			AND `team_portal`.`{$config->getTeamcaptainTeamportalAccessCustomFieldColumnName()}` = '1'
 			AND `civicrm_contact`.`is_deleted` = '0'
 			ORDER BY civicrm_contact.display_name	
+			{$limit}
 		";
 		$params[1] = array($config->getTeamCaptainRelationshipTypeId(), 'Integer');
 

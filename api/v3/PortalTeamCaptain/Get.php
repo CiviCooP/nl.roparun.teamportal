@@ -152,7 +152,7 @@ function _civicrm_api3_portal_team_captain_Get_spec(&$spec) {
   $spec['role'] = array(
     'api.required' => false,
     'api.return' => true,
-    'api.filter' => true,
+    'api.filter' => false,
     'title' => E::ts('Role'),
     'type' => CRM_Utils_Type::T_STRING,
     'pseudoconstant' => array(
@@ -181,10 +181,11 @@ function _civicrm_api3_portal_team_captain_Get_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_portal_team_captain_Get($params) {
+  $options = _civicrm_api3_get_options_from_params($params);
   $filterIsActive = null;
   if (isset($params['is_active'])) {
     $filterIsActive = $params['is_active'] ? 1 : 0;
   }
-  $returnValues = CRM_Teamportal_Api_Captains::getTeamCaptains($params['team_id'], $filterIsActive);
+  $returnValues = CRM_Teamportal_Api_Captains::getTeamCaptains($params['team_id'], $filterIsActive, $options);
   return civicrm_api3_create_success($returnValues, $params, 'RoparunTeamCaptain', 'get');
 }

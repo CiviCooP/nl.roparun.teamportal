@@ -8,7 +8,7 @@
  * @return void
  * @see http://wiki.civicrm.org/confluence/display/CRMDOC/API+Architecture+Standards
  */
-function _civicrm_api3_portal_team_captain_Get_Portal_Users_spec(&$spec) {
+function _civicrm_api3_portal_team_captain_Get_Portal_Users_Count_spec(&$spec) {
 
 }
 
@@ -21,8 +21,11 @@ function _civicrm_api3_portal_team_captain_Get_Portal_Users_spec(&$spec) {
  * @see civicrm_api3_create_error
  * @throws API_Exception
  */
-function civicrm_api3_portal_team_captain_Get_Portal_Users($params) {
-  $options = _civicrm_api3_get_options_from_params($params);
-	$returnValues = CRM_Teamportal_Api_Captains::getPortalUsers($options);
-	return civicrm_api3_create_success($returnValues, $params, 'RoparunTeamCaptain', 'getportalusers');
+function civicrm_api3_portal_team_captain_Get_Portal_Users_Count($params) {
+	$returnValues = CRM_Teamportal_Api_Captains::getPortalUsers();
+
+  return array(
+    'result' => count($returnValues),
+    'is_error' => 0,
+  );
 }
