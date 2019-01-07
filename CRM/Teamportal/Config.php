@@ -102,6 +102,20 @@ class CRM_Teamportal_Config {
   public function getTeamNameCustomFieldColumnName() {
     return $this->genericConfig->getTeamNameCustomFieldColumnName();
   }
+
+  /**
+   * Getter for the id of the custom field average_speed.
+   */
+  public function getAverageSpeedCustomFieldId() {
+    return $this->genericConfig->getAverageSpeedCustomFieldId();
+  }
+
+  /**
+   * Getter for the column name of the custom field average_speed.
+   */
+  public function getAverageSpeedCustomFieldColumnName() {
+    return $this->genericConfig->getAverageSpeedCustomFieldColumnName();
+  }
   
   /**
    * Getter for the custom group id of custom group team_member_data.

@@ -1,0 +1,138 @@
+{
+  "name": "portal__wijzig_team_bijzonderheden",
+  "title": "Portal: wijzig team bijzonderheden",
+  "is_active": "1",
+  "description": "Deze formprocessor zorgt er voor dat de velden die onder bijzonderheden bijgewerkt kunnen worden in het portaal ook in civicrm verwerkt worden.",
+  "output_handler": "OutputAllActionOutput",
+  "output_handler_configuration": [],
+  "enable_default_data": "1",
+  "default_data_output_configuration": {
+    "bijzonderheden_team": "action.teamdata.custom_team_data_remarks",
+    "doel_donaties": "action.teamdata.custom_team_data_target_dontaions",
+    "favoriete_nummer": "action.teamdata.custom_team_data_favorite_song",
+    "motivatie": "action.teamdata.custom_team_data_motivation",
+    "samenstelling_team": "action.teamdata.custom_team_data_team_membership"
+  },
+  "permission": "access Team Portal API",
+  "inputs": [
+    {
+      "title": "Bijzonderheden team",
+      "name": "bijzonderheden_team",
+      "type": "Text",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Doel donaties",
+      "name": "doel_donaties",
+      "type": "Text",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Favoriete nummer",
+      "name": "favoriete_nummer",
+      "type": "Text",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Motivatie",
+      "name": "motivatie",
+      "type": "Text",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Samenstelling team",
+      "name": "samenstelling_team",
+      "type": "Text",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "team_contact_id",
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "actions": [
+    {
+      "name": "huidig_roparun_evenement",
+      "title": "Huidig Roparun Evenement",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": "",
+      "delay_configuration": ""
+    },
+    {
+      "name": "werk_evenement_registratie_bij",
+      "title": "Werk evenement registratie bij",
+      "type": "CreateOrUpdateParticipant",
+      "configuration": {
+        "status_id": "1",
+        "role_id": "5",
+        "update_existing": "1"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id",
+        "contact_id": "input.team_contact_id",
+        "custom_team_data_team_membership": "input.samenstelling_team",
+        "custom_team_data_motivation": "input.motivatie",
+        "custom_team_data_target_dontaions": "input.doel_donaties",
+        "custom_team_data_favorite_song": "input.favoriete_nummer",
+        "custom_team_data_remarks": "input.bijzonderheden_team"
+      },
+      "condition_configuration": "",
+      "delay_configuration": ""
+    }
+  ],
+  "default_data_inputs": [
+    {
+      "name": "team_contact_id",
+      "type": "Integer",
+      "is_required": "1",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    }
+  ],
+  "default_data_actions": [
+    {
+      "name": "huidig_roparun_evenement",
+      "title": "Huidig roparun evenement",
+      "type": "CurrentEvent",
+      "configuration": [],
+      "mapping": [],
+      "condition_configuration": ""
+    },
+    {
+      "name": "teamdata",
+      "title": "Teamdata",
+      "type": "GetParticipant",
+      "configuration": {
+        "role_id": "5"
+      },
+      "mapping": {
+        "event_id": "action.huidig_roparun_evenement.event_id",
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": ""
+    }
+  ]
+}
