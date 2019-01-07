@@ -1,5 +1,5 @@
 {
-  "name": "portal__wijzig_team_bijzonderheden",
+  "name": "portal_wijzig_team_bijzonderheden",
   "title": "Portal: wijzig team bijzonderheden",
   "is_active": "1",
   "description": "Deze formprocessor zorgt er voor dat de velden die onder bijzonderheden bijgewerkt kunnen worden in het portaal ook in civicrm verwerkt worden.",
