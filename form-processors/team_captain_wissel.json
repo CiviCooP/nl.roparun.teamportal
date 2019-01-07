@@ -8,7 +8,7 @@
   "enable_default_data": "1",
   "default_data_output_configuration": {
     "display_name_current_team_captain": "action.huidige_team_captain.display_name",
-    "current_captain_functie": "action.evenement_registratie.custom_11"
+    "current_captain_functie": "action.evenement_registratie.custom_team_member_data_team_role"
   },
   "permission": "access Team Portal API",
   "inputs": [

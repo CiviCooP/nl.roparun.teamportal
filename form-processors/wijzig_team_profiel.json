@@ -8,8 +8,8 @@
   "default_data_output_configuration": {
     "land": "action.vestigingsadres.country_id",
     "vestigingsplaats": "action.vestigingsadres.city",
-    "naam": "action.deelnemersrecord.custom_7",
-    "start_locatie": "action.deelnemersrecord.custom_6",
+    "naam": "action.deelnemersrecord.custom_team_data_team_name",
+    "start_locatie": "action.deelnemersrecord.custom_team_data_start_location",
     "website": "action.website.url",
     "facebook": "action.facebook.url",
     "googleplus": "action.google_plus.url",
@@ -22,11 +22,33 @@
     "twitter": "action.twitter.url",
     "vine": "action.vine.url",
     "team_contact_id": "action.deelnemersrecord.id",
-    "telefoon": "action.telefoonnummer_tidens_evenement.phone"
+    "telefoon": "action.telefoonnummer_tidens_evenement.phone",
+    "gemiddelde_snelheid": "action.deelnemersrecord.custom_team_data_average_speed",
+    "voertuig_1_aanhanger": "action.deelnemersrecord.custom_vehicle_1_vehicle_1_trailer_type",
+    "voertuig_1_kenteken": "action.deelnemersrecord.custom_vehicle_1_vehicle_1_registration_nr",
+    "voertuig_1_merk": "action.deelnemersrecord.custom_vehicle_1_vehicle_1_brand",
+    "voertuig_1_soort": "action.deelnemersrecord.custom_vehicle_1_vehicle_1_type",
+    "voertuig_1_type": "action.deelnemersrecord.custom_vehicle_1_vehicle_1_make",
+    "voertuig_2_aanhanger": "action.deelnemersrecord.custom_vehicle_2_vehicle_2_trailer_type",
+    "voertuig_2_kenteken": "action.deelnemersrecord.custom_vehicle_2_vehicle_2_registration_nr",
+    "voertuig_2_merk": "action.deelnemersrecord.custom_vehicle_2_vehicle_2_brand",
+    "voertuig_2_soort": "action.deelnemersrecord.custom_vehicle_2_vehicle_2_type",
+    "voertuig_2_type": "action.deelnemersrecord.custom_vehicle_2_vehicle_2_make",
+    "voertuig_3_aanhanger": "action.deelnemersrecord.custom_vehicle_3_vehicle_3_trailer_type",
+    "voertuig_3_kenteken": "action.deelnemersrecord.custom_vehicle_3_vehicle_3_registration_nr",
+    "voertuig_3_merk": "action.deelnemersrecord.custom_vehicle_3_vehicle_3_brand",
+    "voertuig_3_soort": "action.deelnemersrecord.custom_vehicle_3_vehicle_3_type",
+    "voertuig_3_type": "action.deelnemersrecord.custom_vehicle_3_vehicle_3_make",
+    "voertuig_4_aanhanger": "action.deelnemersrecord.custom_vehicle_4_vehicle_4_trailer_type",
+    "voertuig_4_kenteken": "action.deelnemersrecord.custom_vehicle_4_vehicle_4_registration_nr",
+    "voertuig_4_merk": "action.deelnemersrecord.custom_vehicle_4_vehicle_4_brand",
+    "voertuig_4_soort": "action.deelnemersrecord.custom_vehicle_4_vehicle_4_type",
+    "voertuig_4_type": "action.deelnemersrecord.custom_vehicle_4_vehicle_4_make"
   },
   "permission": "access Team Portal API",
   "inputs": [
     {
+      "title": "Facebook",
       "name": "facebook",
       "type": "String",
       "is_required": "0",
@@ -35,6 +57,16 @@
       "validators": []
     },
     {
+      "title": "Gemiddelde snelheid",
+      "name": "gemiddelde_snelheid",
+      "type": "Float",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Instagram",
       "name": "instagram",
       "type": "String",
       "is_required": "0",
@@ -43,6 +75,7 @@
       "validators": []
     },
     {
+      "title": "Land",
       "name": "land",
       "type": "Country",
       "is_required": "0",
@@ -51,6 +84,7 @@
       "validators": []
     },
     {
+      "title": "Naam",
       "name": "naam",
       "type": "String",
       "is_required": "1",
@@ -59,6 +93,7 @@
       "validators": []
     },
     {
+      "title": "Startlocatie",
       "name": "start_locatie",
       "type": "OptionGroup",
       "is_required": "1",
@@ -69,6 +104,7 @@
       "validators": []
     },
     {
+      "title": "Team Contact ID",
       "name": "team_contact_id",
       "type": "Integer",
       "is_required": "1",
@@ -77,6 +113,7 @@
       "validators": []
     },
     {
+      "title": "Telefoon",
       "name": "telefoon",
       "type": "String",
       "is_required": "0",
@@ -85,6 +122,7 @@
       "validators": []
     },
     {
+      "title": "Twitter",
       "name": "twitter",
       "type": "String",
       "is_required": "0",
@@ -93,6 +131,7 @@
       "validators": []
     },
     {
+      "title": "Vestigingsplaats",
       "name": "vestigingsplaats",
       "type": "String",
       "is_required": "0",
@@ -101,6 +140,211 @@
       "validators": []
     },
     {
+      "title": "Voertuig 1 Aanhanger",
+      "name": "voertuig_1_aanhanger",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_trailer_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 1 Kenteken",
+      "name": "voertuig_1_kenteken",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 1 Merk",
+      "name": "voertuig_1_merk",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 1 Soort",
+      "name": "voertuig_1_soort",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 1 Type",
+      "name": "voertuig_1_type",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 2 Aanhanger",
+      "name": "voertuig_2_aanhanger",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_trailer_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 2 Kenteken",
+      "name": "voertuig_2_kenteken",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 2 Merk",
+      "name": "voertuig_2_merk",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 2 Soort",
+      "name": "voertuig_2_soort",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 2 Type",
+      "name": "voertuig_2_type",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 3 Aanhanger",
+      "name": "voertuig_3_aanhanger",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_trailer_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 3 Kenteken",
+      "name": "voertuig_3_kenteken",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 3 Merk",
+      "name": "voertuig_3_merk",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 3 Soort",
+      "name": "voertuig_3_soort",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 3 Type",
+      "name": "voertuig_3_type",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 4 Aanhanger",
+      "name": "voertuig_4_aanhanger",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_trailer_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 4 Kenteken",
+      "name": "voertuig_4_kenteken",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 4 Merk",
+      "name": "voertuig_4_merk",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Voertuig 4 Soort",
+      "name": "voertuig_4_soort",
+      "type": "OptionGroup",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": {
+        "use_label_as_value": "0",
+        "option_group_name": "vehicle_types"
+      },
+      "validators": []
+    },
+    {
+      "title": "Voertuig 4 Type",
+      "name": "voertuig_4_type",
+      "type": "String",
+      "is_required": "0",
+      "default_value": "",
+      "configuration": [],
+      "validators": []
+    },
+    {
+      "title": "Website",
       "name": "website",
       "type": "String",
       "is_required": "0",
@@ -116,7 +360,8 @@
       "type": "CurrentEvent",
       "configuration": [],
       "mapping": [],
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "campagne",
@@ -126,7 +371,8 @@
       "mapping": {
         "event_id": "action.evenement.event_id"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "vandaag",
@@ -167,9 +413,31 @@
         "contact_id": "input.team_contact_id",
         "campaign_id": "action.campagne.campaign_id",
         "custom_team_data_start_location": "input.start_locatie",
-        "custom_team_data_team_name": "input.naam"
+        "custom_team_data_team_name": "input.naam",
+        "custom_team_data_average_speed": "input.gemiddelde_snelheid",
+        "custom_vehicle_1_vehicle_1_type": "input.voertuig_1_soort",
+        "custom_vehicle_1_vehicle_1_brand": "input.voertuig_1_merk",
+        "custom_vehicle_1_vehicle_1_make": "input.voertuig_1_type",
+        "custom_vehicle_1_vehicle_1_registration_nr": "input.voertuig_1_kenteken",
+        "custom_vehicle_1_vehicle_1_trailer_type": "input.voertuig_1_aanhanger",
+        "custom_vehicle_2_vehicle_2_type": "input.voertuig_2_soort",
+        "custom_vehicle_2_vehicle_2_brand": "input.voertuig_2_merk",
+        "custom_vehicle_2_vehicle_2_make": "input.voertuig_2_type",
+        "custom_vehicle_2_vehicle_2_registration_nr": "input.voertuig_2_kenteken",
+        "custom_vehicle_2_vehicle_2_trailer_type": "input.voertuig_2_aanhanger",
+        "custom_vehicle_3_vehicle_3_type": "input.voertuig_3_soort",
+        "custom_vehicle_3_vehicle_3_brand": "input.voertuig_3_merk",
+        "custom_vehicle_3_vehicle_3_make": "input.voertuig_3_type",
+        "custom_vehicle_3_vehicle_3_registration_nr": "input.voertuig_3_kenteken",
+        "custom_vehicle_3_vehicle_3_trailer_type": "input.voertuig_3_aanhanger",
+        "custom_vehicle_4_vehicle_4_type": "input.voertuig_4_soort",
+        "custom_vehicle_4_vehicle_4_brand": "input.voertuig_4_merk",
+        "custom_vehicle_4_vehicle_4_make": "input.voertuig_4_type",
+        "custom_vehicle_4_vehicle_4_registration_nr": "input.voertuig_4_kenteken",
+        "custom_vehicle_4_vehicle_4_trailer_type": "input.voertuig_4_aanhanger"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "website",
@@ -182,7 +450,8 @@
         "contact_id": "input.team_contact_id",
         "url": "input.website"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "facebook",
@@ -195,7 +464,8 @@
         "contact_id": "input.team_contact_id",
         "url": "input.facebook"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "instagram",
@@ -208,7 +478,8 @@
         "contact_id": "input.team_contact_id",
         "url": "input.instagram"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "twitter",
@@ -221,7 +492,8 @@
         "contact_id": "input.team_contact_id",
         "url": "input.twitter"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "werk_vestigingsadres_bi",
@@ -236,7 +508,8 @@
         "country_id": "input.land",
         "contact_id": "input.team_contact_id"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "werk_telefoonnummer_tijdens_evenement_bij",
@@ -250,7 +523,8 @@
         "contact_id": "input.team_contact_id",
         "phone": "input.telefoon"
       },
-      "condition_configuration": ""
+      "condition_configuration": "",
+      "delay_configuration": ""
     },
     {
       "name": "teamnaam_gewijzigd",
@@ -264,7 +538,8 @@
       "mapping": {
         "source_contact_id": "input.team_contact_id",
         "target_contact_id": "input.team_contact_id",
-        "activity_date": "action.vandaag.date"
+        "activity_date": "action.vandaag.date",
+        "campaign_id": "action.campagne.campaign_id"
       },
       "condition_configuration": {
         "name": "ParametersDontMatch",
@@ -272,7 +547,7 @@
         "default_configuration": [],
         "parameter_mapping": {
           "parameter1": "input.naam",
-          "parameter2": "action.teamdata.custom_7"
+          "parameter2": "action.teamdata.custom_team_data_team_name"
         }
       },
       "delay_configuration": ""

@@ -20,8 +20,8 @@
     "verzekeringsnummer": "action.haal_teamlid_op.custom_Teamlidgegevens_ICE_Verzekeringsnummer",
     "woonplaats": "action.haal_teamlid_op.city",
     "tussenvoegsel": "action.haal_teamlid_op.middle_name",
-    "functie": "action.deelnemer_gegevens.custom_11",
-    "teamlid_op_website": "action.deelnemer_gegevens.custom_12",
+    "functie": "action.deelnemer_gegevens.custom_team_member_data_team_role",
+    "teamlid_op_website": "action.deelnemer_gegevens.custom_team_member_data_website",
     "geboorte_datum": "action.haal_teamlid_op.birth_date"
   },
   "permission": "access Team Portal API",
