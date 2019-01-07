@@ -18,7 +18,7 @@ class TeamLeden extends AbstractType implements OptionListInterface {
   }
 
 
-  public function validateValue($value) {
+  public function validateValue($value, $allValues=array()) {
     if (\CRM_Utils_Type::validate($value, 'Integer', false) === NULL) {
       return false;
     }

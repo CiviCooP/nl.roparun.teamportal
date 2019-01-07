@@ -8,8 +8,8 @@
   "default_data_output_configuration": {
     "land": "action.vestigingsadres.country_id",
     "vestigingsplaats": "action.vestigingsadres.city",
-    "naam": "action.deelnemersrecor.custom_7",
-    "start_locatie": "action.deelnemersrecor.custom_6",
+    "naam": "action.deelnemersrecord.custom_7",
+    "start_locatie": "action.deelnemersrecord.custom_6",
     "website": "action.website.url",
     "facebook": "action.facebook.url",
     "googleplus": "action.google_plus.url",
@@ -21,7 +21,7 @@
     "tumblr": "action.tumblr.url",
     "twitter": "action.twitter.url",
     "vine": "action.vine.url",
-    "team_contact_id": "action.deelnemersrecor.id",
+    "team_contact_id": "action.deelnemersrecord.id",
     "telefoon": "action.telefoonnummer_tidens_evenement.phone"
   },
   "permission": "access Team Portal API",
@@ -129,6 +129,31 @@
       "condition_configuration": ""
     },
     {
+      "name": "vandaag",
+      "title": "Vandaag",
+      "type": "SetDateValue",
+      "configuration": {
+        "date": "now"
+      },
+      "mapping": [],
+      "condition_configuration": "",
+      "delay_configuration": ""
+    },
+    {
+      "name": "teamdata",
+      "title": "Teamdata",
+      "type": "GetParticipant",
+      "configuration": {
+        "role_id": "5"
+      },
+      "mapping": {
+        "event_id": "action.evenement.event_id",
+        "contact_id": "input.team_contact_id"
+      },
+      "condition_configuration": "",
+      "delay_configuration": ""
+    },
+    {
       "name": "werk_evenement_registratie_bij",
       "title": "Werk evenement registratie bij",
       "type": "CreateOrUpdateParticipant",
@@ -226,6 +251,31 @@
         "phone": "input.telefoon"
       },
       "condition_configuration": ""
+    },
+    {
+      "name": "teamnaam_gewijzigd",
+      "title": "Teamnaam gewijzigd",
+      "type": "CreateActivity",
+      "configuration": {
+        "activity_type": "58",
+        "activity_status": "2",
+        "subject": "Teamnaam gewijzigd"
+      },
+      "mapping": {
+        "source_contact_id": "input.team_contact_id",
+        "target_contact_id": "input.team_contact_id",
+        "activity_date": "action.vandaag.date"
+      },
+      "condition_configuration": {
+        "name": "ParametersDontMatch",
+        "title": "Parameters don't match",
+        "default_configuration": [],
+        "parameter_mapping": {
+          "parameter1": "input.naam",
+          "parameter2": "action.teamdata.custom_7"
+        }
+      },
+      "delay_configuration": ""
     }
   ],
   "default_data_inputs": [
@@ -270,7 +320,7 @@
       "condition_configuration": ""
     },
     {
-      "name": "deelnemersrecor",
+      "name": "deelnemersrecord",
       "title": "Deelnemersrecord",
       "type": "GetParticipant",
       "configuration": {
