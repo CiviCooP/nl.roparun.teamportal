@@ -274,7 +274,7 @@ function _civicrm_api3_portal_team_member_Get_queryDao($count, $params) {
     $limit = "";
   }
   $teamMemberSql = "
-    SELECT
+    SELECT DISTINCT 
     {$select}
     FROM civicrm_contact
     INNER JOIN civicrm_participant ON civicrm_contact.id = civicrm_participant.contact_id
