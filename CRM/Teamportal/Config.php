@@ -8,18 +8,12 @@ class CRM_Teamportal_Config {
   
   private $_teamRoleCustomFieldId;
   private $_teamRoleCustomFieldColumnName;
-  private $_activeParticipantStatusIds = array();
   private $_orderActivityTypeId;
   
   private function __construct() {
     $this->genericConfig = CRM_Generic_Config::singleton();
     
     $this->loadCustomGroups();
-    
-    $participantStatuses = civicrm_api3('ParticipantStatusType', 'get', array('is_active' => 1, 'class' => array('IN' => array("Positive")), 'options' => array('limit' => 0)));
-    foreach($participantStatuses['values'] as $participantStatus) {
-      $this->_activeParticipantStatusIds[] = $participantStatus['id'];
-    }
 
     try {
       $this->_orderActivityTypeId = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'order', 'option_group_id' => 'activity_type'));
@@ -178,7 +172,7 @@ class CRM_Teamportal_Config {
    * Returns an array with status ids for active participant statuses.
    */
   public function getActiveParticipantStatusIds() {
-    return $this->_activeParticipantStatusIds;
+    return $this->genericConfig->getActiveParticipantStatusIds();
   }
   
   /**
