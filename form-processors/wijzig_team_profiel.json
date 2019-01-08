@@ -532,7 +532,7 @@
       "type": "CreateActivity",
       "configuration": {
         "activity_type": "58",
-        "activity_status": "2",
+        "activity_status": "1",
         "subject": "Teamnaam gewijzigd"
       },
       "mapping": {
