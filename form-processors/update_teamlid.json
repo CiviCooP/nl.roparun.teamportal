@@ -202,12 +202,15 @@
       "type": "CreateUpdateIndividual",
       "configuration": {
         "contact_sub_type": "Teamlid",
+        "address_is_primary": "1",
         "address_location_type": "1",
-        "address_update_existing": "-1",
+        "address_update_existing": "1",
         "email_location_type": "1",
-        "email_update_existing": "-1",
+        "email_update_existing": "1",
+        "email_is_primary": "1",
         "phone_location_type": "1",
-        "phone_update_existing": "-1"
+        "phone_is_primary": "1",
+        "phone_update_existing": "1"
       },
       "mapping": {
         "first_name": "input.voornaam",
